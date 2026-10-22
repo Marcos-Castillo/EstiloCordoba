@@ -168,7 +168,8 @@ stateDiagram-v2
 
 ## 3. Diagrama de Casos de Uso
 
-**Herramienta**: Excalidraw · **Online**: https://excalidraw.com/#json=BaQGcGb1mVHyUwXA7q2Q4,kEX-ziXGvICs-rdzwJWiVQ
+**Imágenes**: [`uml/use-case.png`](uml/use-case.png) · **Archivo editable**: [`uml/use-case.excalidraw`](uml/use-case.excalidraw) (se abre en excalidraw.com → File → Open)
+https://excalidraw.com/#json=_w6ei7RPjv4_yTnYMGhCo,uUvUaRZVeOZVbaAdoICs-g
 
 Actores: **Cliente**, **Barbero** y **Administrador**. Foco en la interacción del usuario con la transacción principal:
 
@@ -178,8 +179,8 @@ Actores: **Cliente**, **Barbero** y **Administrador**. Foco en la interacción d
 
 ## 4. Diagrama de Componentes
 
-**Herramienta**: Excalidraw · **Online**: https://excalidraw.com/#json=s7GNhStrsbzY6PEgm9Y2F,6ig5CftAw9FlRQKcFtYaSQ
-
+**Imágenes**: [`uml/components-deployment.png`](uml/components-deployment.png) · **Archivo editable**: [`uml/componentes-despliegue.excalidraw`](uml/componentes-despliegue.excalidraw) (se abre en excalidraw.com → File → Open)
+https://excalidraw.com/#json=p0evWtdkZ2UVvPCIHbEuZ,qsQEZygyoDWx2jmWCw0yOA
 Arquitectura en capas de la SPA:
 1. **Presentación**: Login UI, Clientes UI, Turnos UI, Atenciones UI, Catálogo UI (HTML + Bootstrap 5).
 2. **Lógica**: controladores JavaScript por dominio (`AuthController`, `ClientesController`, `TurnosController`, `AtencionesController`, `CatalogoController`). `AtencionesController` es el componente de la transacción principal.
@@ -188,8 +189,8 @@ Arquitectura en capas de la SPA:
 
 ## 5. Diagrama de Despliegue
 
-**Herramienta**: Excalidraw · **Online**: https://excalidraw.com/#json=s7GNhStrsbzY6PEgm9Y2F,6ig5CftAw9FlRQKcFtYaSQ
-
+**Imágenes**: [`uml/components-deployment.png`](uml/components-deployment.png) · **Archivo editable**: [`uml/componentes-despliegue.excalidraw`](uml/componentes-despliegue.excalidraw) (se abre en excalidraw.com → File → Open)
+https://excalidraw.com/#json=p0evWtdkZ2UVvPCIHbEuZ,qsQEZygyoDWx2jmWCw0yOA
 - `«device»` Navegador del usuario: ejecuta la SPA + `localStorage`.
 - `«execution environment»` **GitHub Pages**: sirve la app estática por HTTPS.
 - `«node»` **GitHub Actions (CI/CD)**: valida (lint/build) en cada push y despliega a Pages (RNF06).
