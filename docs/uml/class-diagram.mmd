@@ -1,0 +1,143 @@
+classDiagram
+    %% MODP — Clases esenciales y de soporte para la transacción principal: la Atención
+
+    class Cliente {
+        +int id
+        +String nombre
+        +String apellido
+        +String tipoDocumento
+        +String numeroDocumento
+        +String telefono
+        +String correoElectronico
+        +String localidad
+        +String redesSociales
+        +boolean programaBeneficios
+        +registrar()
+        +modificar()
+        +darDeBaja()
+    }
+
+    class Barbero {
+        +int id
+        +String nombre
+        +String apellido
+        +String telefono
+        +boolean activo
+        +atender(atencion)
+    }
+
+    class Servicio {
+        +int id
+        +String nombre
+        +String categoria
+        +int duracionEstimadaMin
+        +double precioVenta
+        +calcularPrecio()
+    }
+
+    class Producto {
+        +int id
+        +String nombre
+        +String marca
+        +double precioVenta
+        +int stock
+        +descontarStock(cantidad)
+        +reponerStock(cantidad)
+    }
+
+    class Atencion {
+        +int id
+        +Date fecha
+        +Time hora
+        +EstadoAtencion estado
+        +MedioPago medioPago
+        +double montoTotal
+        +Date fechaCobro
+        +registrar()
+        +iniciarProceso()
+        +finalizar()
+        +marcarPendientePago()
+        +cobrar(medioPago)
+        +calcularMontoTotal()
+    }
+
+    class DetalleAtencion {
+        +int id
+        +int cantidad
+        +double precioUnitario
+        +double subtotal()
+    }
+
+    class Turno {
+        +int id
+        +Date fechaHoraAgendada
+        +String canalSolicitud
+        +String estadoTurno
+        +cancelar()
+        +reprogramar()
+    }
+
+    class Usuario {
+        +int id
+        +String usuario
+        +String passwordHash
+        +String rol
+        +autenticar(clave)
+        +cerrarSesion()
+    }
+
+    class Proveedor {
+        +int id
+        +String razonSocial
+        +String cuit
+        +String telefono
+        +String correoElectronico
+        +String direccion
+    }
+
+    class Compra {
+        +int id
+        +Date fecha
+        +double total
+        +registrar()
+        +actualizarStock()
+    }
+
+    class DetalleCompra {
+        +int id
+        +int cantidad
+        +double costoUnitario
+        +subtotal()
+    }
+
+    class MedioPago {
+        <<enumeration>>
+        EFECTIVO
+        TRANSFERENCIA
+        DEBITO
+    }
+
+    class EstadoAtencion {
+        <<enumeration>>
+        REGISTRADA
+        EN_PROCESO
+        FINALIZADA
+        PENDIENTE_PAGO
+        COBRADA
+    }
+
+    Atencion "1" --> "1" Cliente : es para
+    Atencion "1" --> "1" Barbero : realiza
+    Atencion "1" --> "1" Turno : puede originarse en
+    Atencion "1" *-- "1..*" DetalleAtencion : contiene
+    Atencion --> EstadoAtencion : tiene estado
+    Atencion --> MedioPago : se cobra con
+
+    DetalleAtencion --> "0..1" Servicio : incluye
+    DetalleAtencion --> "0..1" Producto : vende
+
+    Compra "1" --> "1" Proveedor : se hace a
+    Compra "1" *-- "1..*" DetalleCompra : incluye
+    DetalleCompra --> "1" Producto : repone
+
+    Usuario --> Barbero : puede ser

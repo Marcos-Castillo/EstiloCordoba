@@ -1,0 +1,30 @@
+stateDiagram-v2
+    %% Ciclo de vida de la transacción principal: la Atención
+
+    state "Registrada" as registrada
+    state "En proceso" as enProceso
+    state "Finalizada" as finalizada
+    state "Pendiente de pago" as pendientePago
+    state "Cobrada" as cobrada
+
+    [*] --> registrada : registrarAtencion(cliente, barbero, servicios, productos)
+    registrada --> enProceso : iniciarProceso()
+    enProceso --> finalizada : finalizarServicios()
+    finalizada --> pendientePago : confirmarPendienteDePago()
+    finalizada --> cobrada : cobrar(medioPago)
+    pendientePago --> cobrada : cobrar(medioPago)
+    pendientePago --> cobrada : registrarTransferenciaDebito()
+    registrada --> [*] : cancelarAntesDeIniciar()
+    cobrada --> [*] : atención archivada
+
+    note right of registrada
+        Estado inicial.
+        Barra: fecha, hora, barbero,
+        cliente, servicios y productos.
+    end note
+
+    note right of cobrada
+        Estado final.
+        Registra medio de pago:
+        efectivo, transferencia o débito.
+    end note
