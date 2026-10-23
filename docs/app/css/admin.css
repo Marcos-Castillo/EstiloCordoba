@@ -1,0 +1,154 @@
+:root {
+  --fondo: #111214;
+  --panel: #1b1d20;
+  --panel-hover: #24272b;
+  --dorado: #d4ad65;
+  --texto: #f5f2ec;
+  --texto-secundario: #a9abb0;
+  --borde: #33363b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+header {
+  padding: 24px 6%;
+  background: #191a1c;
+  border-bottom: 1px solid var(--borde);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+header h1 {
+  margin: 0;
+  color: var(--dorado);
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+header p {
+  margin: 0;
+  color: var(--texto-secundario);
+  font-size: 0.9rem;
+}
+
+main {
+  width: min(1100px, 90%);
+  margin: 48px auto;
+}
+
+main section:first-child {
+  margin-bottom: 38px;
+}
+
+h2 {
+  margin: 0 0 14px;
+  font-size: 1.8rem;
+}
+
+main section:first-child p {
+  display: inline-block;
+  margin: 8px 12px 0 0;
+  padding: 10px 14px;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  color: var(--texto-secundario);
+}
+
+strong {
+  color: var(--dorado);
+}
+
+.opciones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.opciones article {
+  padding: 26px;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  transition:
+    border-color 0.2s,
+    transform 0.2s,
+    background 0.2s;
+}
+
+.opciones article:hover {
+  border-color: var(--dorado);
+  background: var(--panel-hover);
+  transform: translateY(-3px);
+}
+
+.opciones h3 {
+  margin: 0 0 12px;
+  font-size: 1.2rem;
+  color: var(--dorado);
+}
+
+.opciones p {
+  min-height: 48px;
+  margin: 0 0 22px;
+  color: var(--texto-secundario);
+  line-height: 1.6;
+}
+
+button {
+  padding: 11px 18px;
+  border: 1px solid var(--dorado);
+  border-radius: 7px;
+  background: var(--dorado);
+  color: #171513;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.opciones button:disabled {
+  border-color: #4b463c;
+  background: #302d27;
+  color: #c2b08e;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+#cerrarSesion {
+  margin-top: 30px;
+  border-color: var(--borde);
+  background: transparent;
+  color: var(--texto);
+}
+
+#cerrarSesion:hover {
+  border-color: var(--dorado);
+  color: var(--dorado);
+}
+
+@media (max-width: 650px) {
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .opciones {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    margin-top: 30px;
+  }
+}

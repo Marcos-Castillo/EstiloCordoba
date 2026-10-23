@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel del Barbero | Estilo Córdoba</title>
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Barbería Estilo Córdoba</h1>
+      <p>Sistema de gestión</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Panel del Barbero</h2>
+        <p>Usuario: <strong id="nombreUsuario">Barbero</strong></p>
+        <p>Perfil: <strong id="rolUsuario">Barbero</strong></p>
+      </section>
+
+      <section>
+        <h2>Gestión de atenciones</h2>
+        <p>Gestioná las atenciones y el trabajo diario de la barbería.</p>
+
+        <div class="opciones">
+          <article>
+            <h3>Registrar atención</h3>
+            <p>
+              Registrar el cliente, los servicios, los productos y el horario.
+            </p>
+            <button
+              type="button"
+              onclick="window.location.href = 'atenciones.html'"
+            >
+              Registrar atención
+            </button>
+          </article>
+
+          <article>
+            <h3>Consultar atenciones</h3>
+            <p>Consultar las atenciones registradas y sus estados.</p>
+            <button
+              type="button"
+              onclick="window.location.href = 'atenciones.html'"
+            >
+              Consultar atenciones
+            </button>
+          </article>
+
+          <article>
+            <h3>Finalizar atención</h3>
+            <p>
+              Marcar una atención como finalizada cuando termine el servicio.
+            </p>
+            <button
+              type="button"
+              onclick="window.location.href = 'atenciones.html'"
+            >
+              Gestionar estados
+            </button>
+          </article>
+
+          <article>
+            <h3>Cobrar atención</h3>
+            <p>Registrar el medio de pago de una atención finalizada.</p>
+            <button
+              type="button"
+              onclick="window.location.href = 'atenciones.html'"
+            >
+              Gestionar cobros
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <button type="button" id="cerrarSesion">Cerrar sesión</button>
+    </main>
+
+    <script src="js/barbero.js"></script>
+  </body>
+</html>

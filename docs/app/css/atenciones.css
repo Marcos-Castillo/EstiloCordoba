@@ -1,0 +1,126 @@
+.formulario-atencion {
+  margin: 30px 0 40px;
+  padding: 28px;
+  background: var(--panel, #1b1d20);
+  border: 1px solid var(--borde, #33363b);
+  border-radius: 14px;
+}
+
+.formulario-atencion h2 {
+  margin-bottom: 24px;
+  color: var(--dorado, #d4ad65);
+}
+
+#formAtencion {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.campo label {
+  color: var(--texto, #f5f2ec);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--borde, #33363b);
+  border-radius: 7px;
+  background: #111214;
+  color: var(--texto, #f5f2ec);
+  font: inherit;
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: 2px solid var(--dorado, #d4ad65);
+  outline-offset: 2px;
+}
+
+.total {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 16px;
+  background: #111214;
+  border-radius: 8px;
+  color: var(--texto, #f5f2ec);
+  font-size: 1.1rem;
+}
+
+#formAtencion button {
+  justify-self: start;
+}
+
+#mensaje {
+  align-self: center;
+  margin: 0;
+  color: var(--dorado, #d4ad65);
+}
+
+.tabla-contenedor {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0 28px;
+  border: 1px solid var(--borde, #33363b);
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel, #1b1d20);
+  color: var(--texto, #f5f2ec);
+}
+
+th,
+td {
+  padding: 14px;
+  border-bottom: 1px solid var(--borde, #33363b);
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  background: #24272b;
+  color: var(--dorado, #d4ad65);
+  font-size: 0.9rem;
+}
+
+tbody tr:hover {
+  background: #24272b;
+}
+
+#volverPanel {
+  margin: 10px 12px 20px 0;
+  border-color: var(--borde, #33363b);
+  background: transparent;
+  color: var(--texto, #f5f2ec);
+}
+
+#cerrarSesion {
+  margin: 10px 0 20px;
+}
+
+@media (max-width: 650px) {
+  #formAtencion {
+    grid-template-columns: 1fr;
+  }
+
+  .formulario-atencion {
+    padding: 18px;
+  }
+
+  .total {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,394 @@
+:root {
+  --ec-negro: #101010;
+  --ec-carbon: #1b1b1b;
+  --ec-oro: #d4af65;
+  --ec-oro-claro: #e6c982;
+  --ec-blanco: #f5f5f5;
+  --ec-gris: #a0a0a0;
+  --ec-linea: #3a3a3a;
+  --ec-error: #ff8d85;
+  --ec-ok: #8fd19e;
+  --ec-radio: 10px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body.login-body {
+  margin: 0;
+  background: var(--ec-negro);
+  color: var(--ec-blanco);
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Estructura de dos paneles ---------- */
+
+.login-pagina {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ---------- Panel izquierdo: identidad ---------- */
+
+.login-marca {
+  position: relative;
+  background: var(--ec-negro);
+  overflow: hidden;
+  min-height: 0;
+}
+
+.login-marca img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Filete dorado en el borde que separa ambos paneles */
+.login-marca::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--ec-oro) 18%,
+    var(--ec-oro) 82%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* ---------- Panel derecho: formulario ---------- */
+
+.login-acceso {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  background: var(--ec-carbon);
+}
+
+.login-tarjeta {
+  width: 100%;
+  max-width: 420px;
+  animation: ec-entrada 0.6s ease-out both;
+}
+
+.login-cabecera {
+  margin-bottom: 2rem;
+}
+
+.login-titulo {
+  margin: 0 0 0.35rem;
+  font-family: Georgia, "Palatino Linotype", "Book Antiqua", serif;
+  font-size: clamp(1.75rem, 3.2vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ec-oro);
+}
+
+.login-subtitulo {
+  margin: 0 0 1.25rem;
+  font-size: 1.05rem;
+  color: var(--ec-blanco);
+}
+
+.login-regla {
+  width: 56px;
+  height: 2px;
+  margin: 0 0 1.25rem;
+  border: 0;
+  background: var(--ec-oro);
+  opacity: 1;
+}
+
+.login-apoyo {
+  margin: 0;
+  color: var(--ec-gris);
+  font-size: 0.95rem;
+}
+
+/* ---------- Campos ---------- */
+
+.login-campo {
+  margin-bottom: 1.15rem;
+}
+
+.login-etiqueta {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ec-blanco);
+}
+
+.login-control {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 0.65rem 0.9rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ec-blanco);
+  background-color: var(--ec-negro);
+  border: 1px solid var(--ec-linea);
+  border-radius: var(--ec-radio);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.login-control::placeholder {
+  color: #6f6f6f;
+}
+
+.login-control:hover {
+  border-color: var(--ec-oro);
+}
+
+.login-control:focus,
+.login-control:focus-visible {
+  outline: none;
+  border-color: var(--ec-oro-claro);
+  box-shadow: 0 0 0 3px rgba(212, 175, 101, 0.35);
+}
+
+select.login-control {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.5rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1.5l6 6 6-6' fill='none' stroke='%23D4AF65' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.95rem center;
+}
+
+select.login-control option {
+  background: var(--ec-negro);
+  color: var(--ec-blanco);
+}
+
+/* Evita el fondo claro del autocompletado del navegador */
+.login-control:-webkit-autofill,
+.login-control:-webkit-autofill:hover,
+.login-control:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--ec-blanco);
+  caret-color: var(--ec-blanco);
+  box-shadow: 0 0 0 1000px var(--ec-negro) inset;
+  transition: background-color 9999s ease-out;
+}
+
+/* ---------- Mensajes (compatible con el contenido que inserte login.js) ---------- */
+
+#mensaje {
+  min-height: 1.5rem;
+  margin: 0.25rem 0 1rem;
+  font-size: 0.92rem;
+}
+
+#mensaje:empty {
+  min-height: 0;
+  margin: 0;
+}
+
+/* login.js escribe texto directo y le pone color inline (green / red).
+   Se reemplaza por tonos legibles sobre fondo oscuro, sin tocar el JS. */
+#mensaje:not(:empty) {
+  padding: 0.7rem 0.9rem;
+  text-align: center;
+  background: var(--ec-negro);
+  border: 1px solid var(--ec-linea);
+  border-radius: var(--ec-radio);
+}
+
+#mensaje[style*="red"] {
+  color: var(--ec-error) !important;
+  border-color: rgba(255, 141, 133, 0.55);
+  background: rgba(255, 141, 133, 0.08);
+}
+
+#mensaje[style*="green"] {
+  color: var(--ec-ok) !important;
+  border-color: rgba(143, 209, 158, 0.55);
+  background: rgba(143, 209, 158, 0.08);
+}
+
+#mensaje .alert,
+#mensaje > p,
+#mensaje > div,
+#mensaje > span {
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--ec-radio);
+  border: 1px solid var(--ec-linea);
+  background: var(--ec-negro);
+  color: var(--ec-blanco);
+}
+
+#mensaje .alert-danger,
+#mensaje .text-danger {
+  color: var(--ec-error) !important;
+  border-color: rgba(255, 141, 133, 0.55);
+  background: rgba(255, 141, 133, 0.08);
+}
+
+#mensaje .alert-success,
+#mensaje .text-success {
+  color: var(--ec-ok) !important;
+  border-color: rgba(143, 209, 158, 0.55);
+  background: rgba(143, 209, 158, 0.08);
+}
+
+/* ---------- Botón ---------- */
+
+.login-boton {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ec-negro);
+  background: var(--ec-oro);
+  border: 1px solid var(--ec-oro);
+  border-radius: var(--ec-radio);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.login-boton:hover {
+  background: var(--ec-oro-claro);
+  border-color: var(--ec-oro-claro);
+}
+
+.login-boton:active {
+  transform: translateY(1px);
+}
+
+.login-boton:focus-visible {
+  outline: 3px solid var(--ec-blanco);
+  outline-offset: 3px;
+}
+
+/* ---------- Pie ---------- */
+
+.login-pie {
+  margin: 2rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ec-linea);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ec-gris);
+}
+
+/* ---------- Animación única de entrada ---------- */
+
+@keyframes ec-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-tarjeta {
+    animation: none;
+  }
+  .login-control,
+  .login-boton {
+    transition: none;
+  }
+}
+
+/* ---------- Tablets ---------- */
+
+@media (max-width: 991.98px) {
+  .login-pagina {
+    grid-template-columns: 5fr 6fr;
+  }
+
+  .login-acceso {
+    padding: 1.5rem;
+  }
+}
+
+/* ---------- Celulares: paneles apilados ---------- */
+
+@media (max-width: 767.98px) {
+  .login-pagina {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .login-marca {
+    height: clamp(230px, 38vh, 360px);
+  }
+
+  .login-marca img {
+    object-position: center 18%;
+  }
+
+  /* El filete pasa al borde inferior */
+  .login-marca::after {
+    top: auto;
+    left: 0;
+    width: auto;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--ec-oro) 18%,
+      var(--ec-oro) 82%,
+      transparent
+    );
+  }
+
+  .login-acceso {
+    align-items: flex-start;
+    padding: 1.75rem 1.25rem 2.5rem;
+  }
+
+  .login-cabecera {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Pantallas muy bajas en horizontal (celular girado) */
+@media (max-height: 520px) and (min-width: 768px) {
+  .login-acceso {
+    align-items: flex-start;
+  }
+}

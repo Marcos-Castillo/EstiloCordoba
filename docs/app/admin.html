@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel del Administrador | Estilo Córdoba</title>
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Barbería Estilo Córdoba</h1>
+      <p>Sistema de gestión</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Panel del Administrador</h2>
+        <p>Usuario: <strong id="nombreUsuario">Administrador</strong></p>
+        <p>Perfil: <strong id="rolUsuario">Administrador</strong></p>
+      </section>
+
+      <section>
+        <h2>Gestión de atenciones</h2>
+        <p>Administrá el flujo de atención al cliente de la barbería.</p>
+
+        <div class="opciones">
+          <article>
+            <h3>Registrar atención</h3>
+            <p>Registrar clientes, servicios, productos y horarios.</p>
+            <button
+              type="button"
+              onclick="window.location.href = 'atenciones.html'"
+            >
+              Registrar atención
+            </button>
+          </article>
+
+          <article>
+            <h3>Consultar atenciones</h3>
+            <p>Consultar las atenciones registradas y sus estados.</p>
+            <button
+              type="button"
+              onclick="window.location.href = 'atenciones.html'"
+            >
+              Consultar atenciones
+            </button>
+          </article>
+
+          <article>
+            <h3>Finalizar atención</h3>
+            <p>Actualizar el estado de una atención en curso.</p>
+            <button
+              type="button"
+              onclick="window.location.href = 'atenciones.html'"
+            >
+              Gestionar estados
+            </button>
+          </article>
+
+          <article>
+            <h3>Cobrar atención</h3>
+            <p>Registrar el medio de pago de una atención finalizada.</p>
+            <button
+              type="button"
+              onclick="window.location.href = 'atenciones.html'"
+            >
+              Gestionar cobros
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <button type="button" id="cerrarSesion">Cerrar sesión</button>
+    </main>
+
+    <script src="js/admin.js"></script>
+  </body>
+</html>
