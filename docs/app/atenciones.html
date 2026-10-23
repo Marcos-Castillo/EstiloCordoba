@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Atenciones | Estilo Córdoba</title>
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/atenciones.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Barbería Estilo Córdoba</h1>
+      <p id="perfilActual">Sistema de gestión</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Gestión de atenciones</h2>
+        <p>Usuario: <strong id="nombreUsuario"></strong></p>
+        <p>Perfil: <strong id="rolUsuario"></strong></p>
+      </section>
+
+      <section class="formulario-atencion">
+        <h2>Registrar atención</h2>
+
+        <form id="formAtencion">
+          <div class="campo">
+            <label for="cliente">Nombre del cliente</label>
+            <input id="cliente" name="cliente" type="text" required />
+          </div>
+
+          <div class="campo">
+            <label for="barbero">Barbero asignado</label>
+            <input id="barbero" name="barbero" type="text" required />
+          </div>
+
+          <div class="campo">
+            <label for="fecha">Fecha</label>
+            <input id="fecha" name="fecha" type="date" required />
+          </div>
+
+          <div class="campo">
+            <label for="hora">Horario</label>
+            <input id="hora" name="hora" type="time" required />
+          </div>
+
+          <div class="campo">
+            <label for="servicio">Servicio</label>
+            <select id="servicio" name="servicio" required>
+              <option value="">Seleccioná un servicio</option>
+              <option value="Corte clásico" data-precio="40">
+                Corte clásico — $40
+              </option>
+              <option value="Arreglo de barba" data-precio="25">
+                Arreglo de barba — $25
+              </option>
+              <option value="Corte y barba" data-precio="55">
+                Corte y barba — $55
+              </option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="precioServicio">Precio del servicio ($)</label>
+            <input
+              id="precioServicio"
+              type="number"
+              min="0"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <div class="campo">
+            <label for="producto">Producto opcional</label>
+            <select id="producto" name="producto">
+              <option value="">Sin producto</option>
+              <option value="Pomada X" data-precio="10">Pomada — $20</option>
+              <option value="Aceite de barba" data-precio="10">
+                Aceite de barba — $10
+              </option>
+              <option value="Champú" data-precio="10">Champú — $30</option>
+              <option value="Tónico capilar" data-precio="10">
+                Tónico capilar — $15
+              </option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="cantidadProducto">Cantidad de productos</label>
+            <input
+              id="cantidadProducto"
+              type="number"
+              min="0"
+              step="1"
+              value="0"
+            />
+          </div>
+
+          <p class="total">Total estimado: <strong id="total">$0,00</strong></p>
+
+          <button type="submit">Registrar atención</button>
+          <p id="mensaje" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section>
+        <h2>Atenciones registradas</h2>
+        <div class="tabla-contenedor">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Barbero</th>
+                <th>Fecha</th>
+                <th>Horario</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="listaAtenciones"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <button type="button" id="volverPanel">Volver al panel</button>
+      <button type="button" id="cerrarSesion">Cerrar sesión</button>
+    </main>
+
+    <script src="js/atenciones.js"></script>
+  </body>
+</html>
