@@ -1,5 +1,9 @@
 # 02 · Requerimientos del Sistema — Barbería Estilo Córdoba
 
+## Introducción
+
+En esta sección se detallan los requerimientos funcionales y no funcionales del Sistema de Gestión para Barbería Estilo Córdoba. Estos requerimientos establecen las funcionalidades que deberá ofrecer el sistema y las condiciones de calidad, seguridad, rendimiento y mantenimiento que deberá cumplir. Los requerimientos se identifican mediante códigos únicos y se clasifican según su prioridad utilizando el método MoSCoW. Además, se establece una referencia entre los requerimientos funcionales y las épicas definidas en Jira, para facilitar su seguimiento durante la planificación y el desarrollo del proyecto.
+
 Leyenda de prioridad (MoSCoW): **M** = Must, **S** = Should, **C** = Could.
 
 ## Requerimientos Funcionales (RF)
