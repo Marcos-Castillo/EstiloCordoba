@@ -67,6 +67,38 @@
   color: var(--dorado, #d4ad65);
 }
 
+/* Aviso informativo sobre el flujo de cobro */
+.aviso-flujo-cobro {
+  margin: 20px 0;
+  padding: 20px;
+  background: var(--panel, #1b1d20);
+  border: 1px solid var(--dorado, #d4ad65);
+  border-left: 5px solid var(--dorado, #d4ad65);
+  border-radius: 10px;
+  color: var(--texto, #f5f2ec);
+}
+
+.aviso-flujo-cobro h3 {
+  margin: 0 0 12px;
+  color: var(--dorado, #d4ad65);
+  font-size: 1.1rem;
+}
+
+.aviso-flujo-cobro p {
+  margin: 8px 0 0;
+  line-height: 1.6;
+}
+
+.aviso-flujo-cobro .orden-estados {
+  margin: 14px 0;
+  padding: 12px;
+  background: #111214;
+  border-radius: 7px;
+  color: var(--dorado, #d4ad65);
+  font-weight: 600;
+  line-height: 1.8;
+}
+
 .tabla-contenedor {
   width: 100%;
   overflow-x: auto;
@@ -122,5 +154,9 @@ tbody tr:hover {
 
   .total {
     grid-column: auto;
+  }
+
+  .aviso-flujo-cobro {
+    padding: 15px;
   }
 }

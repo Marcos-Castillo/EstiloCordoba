@@ -33,7 +33,6 @@ function guardarStock(stock) {
   localStorage.setItem(CLAVE_STOCK, JSON.stringify(stock));
 }
 
-// Agrega los productos que falten sin modificar el stock existente.
 function asegurarStockInicial() {
   const stock = leerStock();
   let huboCambios = false;
@@ -75,7 +74,6 @@ function iniciarPagina() {
       ? "Panel de administración"
       : "Panel de barbero";
 
-  // Establece el precio del servicio seleccionado.
   campoServicio.addEventListener("change", () => {
     const opcion = campoServicio.selectedOptions[0];
     campoPrecio.value = opcion?.dataset.precio || "";
@@ -153,8 +151,19 @@ function iniciarPagina() {
     const producto = campoProducto.value;
     const cantidadProducto = Number(campoCantidad.value || 0);
 
+    // TC-04: mensaje esperado cuando falta el cliente.
+    if (!cliente) {
+      mostrarMensaje("Debe seleccionar un cliente", true);
+      return;
+    }
+
     if (!nombreValido(cliente)) {
       mostrarMensaje("Ingresá un nombre válido para el cliente.", true);
+      return;
+    }
+
+    if (!barbero) {
+      mostrarMensaje("Debe seleccionar un barbero", true);
       return;
     }
 
@@ -256,7 +265,7 @@ function iniciarPagina() {
       metodoPago: null,
     };
 
-    // Descuenta solamente el producto seleccionado.
+    // Descuenta stock al registrar la atención.
     if (producto && cantidadProducto > 0) {
       stock[producto] -= cantidadProducto;
       guardarStock(stock);
@@ -311,6 +320,14 @@ function iniciarPagina() {
         );
       } else if (atencion.estado === "Pendiente de pago") {
         agregarBoton("Cobrar", () => cobrarAtencion(atencion.id));
+      } else if (atencion.estado === "Cobrada") {
+        const detalle = document.createElement("span");
+        const fechaCobro = atencion.fechaCobro
+          ? new Date(atencion.fechaCobro).toLocaleString("es-AR")
+          : "No disponible";
+
+        detalle.textContent = `Pago: ${atencion.metodoPago || "Sin dato"} — ${fechaCobro}`;
+        celdaAcciones.appendChild(detalle);
       }
 
       fila.appendChild(celdaAcciones);
@@ -338,6 +355,18 @@ function iniciarPagina() {
   }
 
   function cobrarAtencion(id) {
+    const atenciones = leerAtenciones();
+    const atencion = atenciones.find((item) => item.id === id);
+
+    if (!atencion) return;
+
+    if (atencion.estado !== "Pendiente de pago") {
+      alert(
+        "La atención debe estar finalizada y pendiente de pago antes de cobrar.",
+      );
+      return;
+    }
+
     const metodoPago = prompt(
       "Seleccioná el método de pago escribiendo una opción:\nEfectivo\nTransferencia\nDébito",
     );
@@ -359,11 +388,6 @@ function iniciarPagina() {
         ? "Débito"
         : metodoNormalizado.charAt(0).toUpperCase() +
           metodoNormalizado.slice(1);
-
-    const atenciones = leerAtenciones();
-    const atencion = atenciones.find((item) => item.id === id);
-
-    if (!atencion || atencion.estado !== "Pendiente de pago") return;
 
     atencion.estado = "Cobrada";
     atencion.metodoPago = nombreMetodo;

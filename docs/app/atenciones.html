@@ -23,7 +23,7 @@
       <section class="formulario-atencion">
         <h2>Registrar atención</h2>
 
-        <form id="formAtencion">
+        <form id="formAtencion" novalidate>
           <div class="campo">
             <label for="cliente">Nombre del cliente</label>
             <input id="cliente" name="cliente" type="text" required />
@@ -75,12 +75,12 @@
             <label for="producto">Producto opcional</label>
             <select id="producto" name="producto">
               <option value="">Sin producto</option>
-              <option value="Pomada X" data-precio="10">Pomada — $20</option>
+              <option value="Pomada X" data-precio="20">Pomada — $20</option>
               <option value="Aceite de barba" data-precio="10">
                 Aceite de barba — $10
               </option>
-              <option value="Champú" data-precio="10">Champú — $30</option>
-              <option value="Tónico capilar" data-precio="10">
+              <option value="Champú" data-precio="30">Champú — $30</option>
+              <option value="Tónico capilar" data-precio="15">
                 Tónico capilar — $15
               </option>
             </select>
@@ -90,6 +90,7 @@
             <label for="cantidadProducto">Cantidad de productos</label>
             <input
               id="cantidadProducto"
+              name="cantidadProducto"
               type="number"
               min="0"
               step="1"
@@ -104,8 +105,9 @@
         </form>
       </section>
 
-      <section>
+      <section class="seccion-atenciones">
         <h2>Atenciones registradas</h2>
+
         <div class="tabla-contenedor">
           <table>
             <thead>
