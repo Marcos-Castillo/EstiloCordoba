@@ -47,7 +47,7 @@ formulario.addEventListener("submit", function (evento) {
       window.location.href = "barbero.html";
     }
   } else {
-    mensaje.textContent = "Usuario, contraseña o rol incorrectos.";
+    mensaje.textContent = "Credenciales inválidas.";
     mensaje.style.color = "red";
   }
 });

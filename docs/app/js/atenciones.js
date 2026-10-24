@@ -75,6 +75,18 @@ function iniciarPagina() {
       ? "Panel de administración"
       : "Panel de barbero";
 
+  // Muestra el stock disponible junto a cada producto del select.
+  const stockVigente = leerStock();
+
+  Array.from(campoProducto.options).forEach((opcion) => {
+    if (
+      opcion.value &&
+      Object.prototype.hasOwnProperty.call(stockVigente, opcion.value)
+    ) {
+      opcion.textContent += ` (stock ${stockVigente[opcion.value]})`;
+    }
+  });
+
   // Establece el precio del servicio seleccionado.
   campoServicio.addEventListener("change", () => {
     const opcion = campoServicio.selectedOptions[0];
@@ -154,7 +166,7 @@ function iniciarPagina() {
     const cantidadProducto = Number(campoCantidad.value || 0);
 
     if (!nombreValido(cliente)) {
-      mostrarMensaje("Ingresá un nombre válido para el cliente.", true);
+      mostrarMensaje("Debe seleccionar un cliente.", true);
       return;
     }
 
@@ -278,6 +290,21 @@ function iniciarPagina() {
     const atenciones = leerAtenciones();
     listaAtenciones.replaceChildren();
 
+    function textoEstado(atencion) {
+      if (atencion.estado !== "Cobrada" || !atencion.fechaCobro) {
+        return atencion.estado;
+      }
+
+      const fechaCobro = new Date(atencion.fechaCobro).toLocaleString(
+        "es-AR",
+        { dateStyle: "short", timeStyle: "short" },
+      );
+
+      return [atencion.estado, atencion.metodoPago, fechaCobro]
+        .filter(Boolean)
+        .join(" · ");
+    }
+
     atenciones.forEach((atencion) => {
       const fila = document.createElement("tr");
 
@@ -290,7 +317,7 @@ function iniciarPagina() {
           style: "currency",
           currency: "ARS",
         }),
-        atencion.estado,
+        textoEstado(atencion),
       ].forEach((valor) => {
         const celda = document.createElement("td");
         celda.textContent = valor ?? "";
@@ -301,10 +328,12 @@ function iniciarPagina() {
 
       if (atencion.estado === "Registrada") {
         agregarBoton("Iniciar", () => cambiarEstado(atencion.id, "En proceso"));
+        agregarAyuda("Cobrar disponible al finalizar");
       } else if (atencion.estado === "En proceso") {
         agregarBoton("Finalizar", () =>
           cambiarEstado(atencion.id, "Finalizada"),
         );
+        agregarAyuda("Cobrar disponible al finalizar");
       } else if (atencion.estado === "Finalizada") {
         agregarBoton("Pendiente de pago", () =>
           cambiarEstado(atencion.id, "Pendiente de pago"),
@@ -322,6 +351,12 @@ function iniciarPagina() {
         boton.textContent = texto;
         boton.addEventListener("click", accion);
         celdaAcciones.appendChild(boton);
+      }
+
+      function agregarAyuda(texto) {
+        const ayuda = document.createElement("small");
+        ayuda.textContent = texto;
+        celdaAcciones.appendChild(ayuda);
       }
     });
   }
