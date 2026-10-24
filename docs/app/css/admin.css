@@ -152,3 +152,56 @@ button {
     margin-top: 30px;
   }
 }
+
+.tabla-contenedor {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0 0;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+}
+
+.tarjeta {
+  padding: 26px;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+}
+
+.tarjeta table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+  color: var(--texto);
+}
+
+.tarjeta th,
+.tarjeta td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--borde);
+  text-align: left;
+}
+
+.tabla-contenedor thead th {
+  color: var(--dorado);
+}
+
+.tabla-contenedor tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabla-contenedor button {
+  padding: 6px 12px;
+  min-width: 42px;
+  line-height: 1;
+}
+
+.tabla-contenedor button + button {
+  margin-left: 8px;
+}
+
+@media (max-width: 650px) {
+  .tarjeta {
+    padding: 16px;
+  }
+}
