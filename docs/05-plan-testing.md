@@ -57,7 +57,7 @@
 
 | # | Paso | Resultado esperado |
 |---|---|---|
-| 1 | Abrir la atención en estado *Registrada* | Sin botón de cobro disponible para este estado |
+| 1 | Abrir la atención en estado *Registrada* | Sin botón de cobro para este estado; muestra el aviso "Primero debe finalizarse la atención" |
 | 2 | Intentar acción de cobro (si la UI lo permite por atajo/URL) | El sistema rechaza la transición; estado permanece en *Registrada*; mensaje de flujo inválido |
 
 ## TC-06 · Venta de producto sin stock suficiente (RF07, RF08 — camino fallido)
