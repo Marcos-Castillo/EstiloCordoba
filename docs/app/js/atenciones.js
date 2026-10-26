@@ -75,17 +75,25 @@ function iniciarPagina() {
       ? "Panel de administración"
       : "Panel de barbero";
 
-  // Muestra el stock disponible junto a cada producto del select.
-  const stockVigente = leerStock();
-
+  // Guarda el rótulo base de cada opción y muestra el stock disponible junto a cada producto del select.
   Array.from(campoProducto.options).forEach((opcion) => {
-    if (
-      opcion.value &&
-      Object.prototype.hasOwnProperty.call(stockVigente, opcion.value)
-    ) {
-      opcion.textContent += ` (stock ${stockVigente[opcion.value]})`;
-    }
+    opcion.dataset.rotuloBase = opcion.textContent.trim();
   });
+
+  function actualizarStickersStock() {
+    const stockVigente = leerStock();
+
+    Array.from(campoProducto.options).forEach((opcion) => {
+      if (
+        opcion.value &&
+        Object.prototype.hasOwnProperty.call(stockVigente, opcion.value)
+      ) {
+        opcion.textContent = `${opcion.dataset.rotuloBase} (stock ${stockVigente[opcion.value]})`;
+      }
+    });
+  }
+
+  actualizarStickersStock();
 
   // Establece el precio del servicio seleccionado.
   campoServicio.addEventListener("change", () => {
@@ -97,6 +105,36 @@ function iniciarPagina() {
   campoPrecio.addEventListener("input", calcularTotal);
   campoProducto.addEventListener("change", calcularTotal);
   campoCantidad.addEventListener("input", calcularTotal);
+
+  // Aviso inmediato cuando la cantidad excede el stock disponible (TC-06).
+  const botonRegistrar = formulario.querySelector("button[type='submit']");
+
+  function validarStockEnVivo() {
+    const productoVivo = campoProducto.value;
+    const cantidadViva = Number(campoCantidad.value || 0);
+    const stockVigente = leerStock();
+    const disponible = stockVigente[productoVivo];
+    const sinStock =
+      productoVivo &&
+      Number.isInteger(cantidadViva) &&
+      cantidadViva > 0 &&
+      Object.prototype.hasOwnProperty.call(stockVigente, productoVivo) &&
+      disponible < cantidadViva;
+
+    if (sinStock) {
+      mostrarMensaje(
+        `Stock insuficiente de ${productoVivo}. Disponible: ${disponible}.`,
+        true,
+      );
+    } else if (botonRegistrar.disabled) {
+      mostrarMensaje("");
+    }
+
+    botonRegistrar.disabled = sinStock;
+  }
+
+  campoProducto.addEventListener("change", validarStockEnVivo);
+  campoCantidad.addEventListener("input", validarStockEnVivo);
 
   function calcularTotal() {
     const precioServicio = Number(campoPrecio.value) || 0;
@@ -281,6 +319,8 @@ function iniciarPagina() {
     campoPrecio.value = "";
     campoCantidad.value = "0";
     calcularTotal();
+    actualizarStickersStock();
+    validarStockEnVivo();
 
     mostrarMensaje("Atención registrada correctamente.");
     renderizarAtenciones();
@@ -328,12 +368,12 @@ function iniciarPagina() {
 
       if (atencion.estado === "Registrada") {
         agregarBoton("Iniciar", () => cambiarEstado(atencion.id, "En proceso"));
-        agregarAyuda("Cobrar disponible al finalizar");
+        agregarAyuda("Primero debe finalizarse la atención");
       } else if (atencion.estado === "En proceso") {
         agregarBoton("Finalizar", () =>
           cambiarEstado(atencion.id, "Finalizada"),
         );
-        agregarAyuda("Cobrar disponible al finalizar");
+        agregarAyuda("Primero debe finalizarse la atención");
       } else if (atencion.estado === "Finalizada") {
         agregarBoton("Pendiente de pago", () =>
           cambiarEstado(atencion.id, "Pendiente de pago"),
@@ -355,6 +395,7 @@ function iniciarPagina() {
 
       function agregarAyuda(texto) {
         const ayuda = document.createElement("small");
+        ayuda.className = "ayuda-estado";
         ayuda.textContent = texto;
         celdaAcciones.appendChild(ayuda);
       }
