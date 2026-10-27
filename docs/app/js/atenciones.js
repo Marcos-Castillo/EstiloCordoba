@@ -74,6 +74,27 @@ function iniciarPagina() {
       ? "Panel de administración"
       : "Panel de barbero";
 
+  // Guarda el rótulo base de cada opción y muestra el stock disponible junto a cada producto del select.
+  Array.from(campoProducto.options).forEach((opcion) => {
+    opcion.dataset.rotuloBase = opcion.textContent.trim();
+  });
+
+  function actualizarStickersStock() {
+    const stockVigente = leerStock();
+
+    Array.from(campoProducto.options).forEach((opcion) => {
+      if (
+        opcion.value &&
+        Object.prototype.hasOwnProperty.call(stockVigente, opcion.value)
+      ) {
+        opcion.textContent = `${opcion.dataset.rotuloBase} (stock ${stockVigente[opcion.value]})`;
+      }
+    });
+  }
+
+  actualizarStickersStock();
+
+  // Establece el precio del servicio seleccionado.
   campoServicio.addEventListener("change", () => {
     const opcion = campoServicio.selectedOptions[0];
     campoPrecio.value = opcion?.dataset.precio || "";
@@ -83,6 +104,36 @@ function iniciarPagina() {
   campoPrecio.addEventListener("input", calcularTotal);
   campoProducto.addEventListener("change", calcularTotal);
   campoCantidad.addEventListener("input", calcularTotal);
+
+  // Aviso inmediato cuando la cantidad excede el stock disponible (TC-06).
+  const botonRegistrar = formulario.querySelector("button[type='submit']");
+
+  function validarStockEnVivo() {
+    const productoVivo = campoProducto.value;
+    const cantidadViva = Number(campoCantidad.value || 0);
+    const stockVigente = leerStock();
+    const disponible = stockVigente[productoVivo];
+    const sinStock =
+      productoVivo &&
+      Number.isInteger(cantidadViva) &&
+      cantidadViva > 0 &&
+      Object.prototype.hasOwnProperty.call(stockVigente, productoVivo) &&
+      disponible < cantidadViva;
+
+    if (sinStock) {
+      mostrarMensaje(
+        `Stock insuficiente de ${productoVivo}. Disponible: ${disponible}.`,
+        true,
+      );
+    } else if (botonRegistrar.disabled) {
+      mostrarMensaje("");
+    }
+
+    botonRegistrar.disabled = sinStock;
+  }
+
+  campoProducto.addEventListener("change", validarStockEnVivo);
+  campoCantidad.addEventListener("input", validarStockEnVivo);
 
   function calcularTotal() {
     const precioServicio = Number(campoPrecio.value) || 0;
@@ -158,12 +209,7 @@ function iniciarPagina() {
     }
 
     if (!nombreValido(cliente)) {
-      mostrarMensaje("Ingresá un nombre válido para el cliente.", true);
-      return;
-    }
-
-    if (!barbero) {
-      mostrarMensaje("Debe seleccionar un barbero", true);
+      mostrarMensaje("Debe seleccionar un cliente.", true);
       return;
     }
 
@@ -278,6 +324,8 @@ function iniciarPagina() {
     campoPrecio.value = "";
     campoCantidad.value = "0";
     calcularTotal();
+    actualizarStickersStock();
+    validarStockEnVivo();
 
     mostrarMensaje("Atención registrada correctamente.");
     renderizarAtenciones();
@@ -286,6 +334,21 @@ function iniciarPagina() {
   function renderizarAtenciones() {
     const atenciones = leerAtenciones();
     listaAtenciones.replaceChildren();
+
+    function textoEstado(atencion) {
+      if (atencion.estado !== "Cobrada" || !atencion.fechaCobro) {
+        return atencion.estado;
+      }
+
+      const fechaCobro = new Date(atencion.fechaCobro).toLocaleString("es-AR", {
+        dateStyle: "short",
+        timeStyle: "short",
+      });
+
+      return [atencion.estado, atencion.metodoPago, fechaCobro]
+        .filter(Boolean)
+        .join(" · ");
+    }
 
     atenciones.forEach((atencion) => {
       const fila = document.createElement("tr");
@@ -299,7 +362,7 @@ function iniciarPagina() {
           style: "currency",
           currency: "ARS",
         }),
-        atencion.estado,
+        textoEstado(atencion),
       ].forEach((valor) => {
         const celda = document.createElement("td");
         celda.textContent = valor ?? "";
@@ -310,10 +373,12 @@ function iniciarPagina() {
 
       if (atencion.estado === "Registrada") {
         agregarBoton("Iniciar", () => cambiarEstado(atencion.id, "En proceso"));
+        agregarAyuda("Primero debe finalizarse la atención");
       } else if (atencion.estado === "En proceso") {
         agregarBoton("Finalizar", () =>
           cambiarEstado(atencion.id, "Finalizada"),
         );
+        agregarAyuda("Primero debe finalizarse la atención");
       } else if (atencion.estado === "Finalizada") {
         agregarBoton("Pendiente de pago", () =>
           cambiarEstado(atencion.id, "Pendiente de pago"),
@@ -339,6 +404,13 @@ function iniciarPagina() {
         boton.textContent = texto;
         boton.addEventListener("click", accion);
         celdaAcciones.appendChild(boton);
+      }
+
+      function agregarAyuda(texto) {
+        const ayuda = document.createElement("small");
+        ayuda.className = "ayuda-estado";
+        ayuda.textContent = texto;
+        celdaAcciones.appendChild(ayuda);
       }
     });
   }

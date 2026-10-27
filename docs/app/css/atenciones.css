@@ -160,3 +160,15 @@ tbody tr:hover {
     padding: 15px;
   }
 }
+
+.ayuda-estado {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--texto-secundario, #b9b3a6);
+  font-size: 0.85rem;
+}
+
+#formAtencion button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

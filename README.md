@@ -17,6 +17,16 @@
 - **Jira (backlog)**: https://marcos469204.atlassian.net/jira/software/projects/ES/boards/34/backlog
 - **Confluence (índice)**: https://marcos469204.atlassian.net/wiki/spaces/EstiloCrdo/pages/107347989/Indice
 
+## Demo online
+
+- **URL (deploy GitHub Pages)**: https://marcos-castillo.github.io/EstiloCordoba/app/login.html
+- **Login**: elegir el perfil (Administrador o Barbero) para que coincida con el usuario ingresado.
+
+| Usuario | Contraseña | Rol |
+|---|---|---|
+| admin | admin123 | Administrador |
+| barbero | barbero123 | Barbero |
+
 ## Estructura
 
 - `Consigna.html` — consigna del trabajo

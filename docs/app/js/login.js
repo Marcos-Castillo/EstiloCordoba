@@ -47,7 +47,7 @@ formulario.addEventListener("submit", function (evento) {
       window.location.href = "barbero.html";
     }
   } else {
-    mensaje.textContent = "Credenciales inválidas";
+    mensaje.textContent = "Credenciales inválidas.";
     mensaje.style.color = "red";
   }
 });

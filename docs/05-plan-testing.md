@@ -37,10 +37,10 @@
 |---|---|---|
 | 1 | Ir a Atenciones → "Nueva atención" | Formulario visible con estado *Registrada* |
 | 2 | Seleccionar cliente, barbero, fecha y hora | Datos cargados |
-| 3 | Agregar 1 servicio y 1 producto (cantidad 1) | Subtotales y monto total calculado |
+| 3 | Agregar 1 servicio y 1 producto (cantidad 1) | Subtotales y monto total calculado; el stock del producto se descuenta al registrar |
 | 4 | Presionar "Iniciar proceso" | Estado cambia a *En proceso* |
 | 5 | Presionar "Finalizar" | Estado *Finalizada* |
-| 6 | Presionar "Cobrar" → medio de pago Efectivo | Estado *Cobrada*; monto y medio de pago registrados; stock del producto descontado |
+| 6 | Presionar "Cobrar" → medio de pago Efectivo | Estado *Cobrada*; monto, medio de pago y fecha de cobro registrados |
 | 7 | Ver historial de atenciones | La atención figura como Cobrada |
 
 ## TC-04 · Atención sin cliente seleccionado (RF03 — camino fallido)
@@ -57,7 +57,7 @@
 
 | # | Paso | Resultado esperado |
 |---|---|---|
-| 1 | Abrir la atención en estado *Registrada* | Sin botón de cobro disponible para este estado |
+| 1 | Abrir la atención en estado *Registrada* | Sin botón de cobro para este estado; muestra el aviso "Primero debe finalizarse la atención" |
 | 2 | Intentar acción de cobro (si la UI lo permite por atajo/URL) | El sistema rechaza la transición; estado permanece en *Registrada*; mensaje de flujo inválido |
 
 ## TC-06 · Venta de producto sin stock suficiente (RF07, RF08 — camino fallido)
