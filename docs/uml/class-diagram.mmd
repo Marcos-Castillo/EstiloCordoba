@@ -1,5 +1,5 @@
 classDiagram
-    %% MODP — Clases esenciales y de soporte para la transacción principal: la Atención
+    %% Clases esenciales y de soporte para la transacción principal: la Atención
 
     class Cliente {
         +int id
@@ -112,18 +112,10 @@ classDiagram
 
     class MedioPago {
         <<enumeration>>
-        EFECTIVO
-        TRANSFERENCIA
-        DEBITO
     }
 
     class EstadoAtencion {
         <<enumeration>>
-        REGISTRADA
-        EN_PROCESO
-        FINALIZADA
-        PENDIENTE_PAGO
-        COBRADA
     }
 
     Atencion "1" --> "1" Cliente : es para

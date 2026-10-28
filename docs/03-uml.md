@@ -1,6 +1,6 @@
 # 03 · Modelado UML — transacción principal: "Atención"
 
-Los 5 diagramas modelan la **transacción principal del sistema: la Atención** (atención al cliente), su ciclo de vida y los elementos esenciales y de soporte (MODP — Modelo de Objetos del Dominio del Problema).
+Los 5 diagramas modelan la **transacción principal del sistema: la Atención** (atención al cliente), su ciclo de vida y los elementos esenciales y de soporte.
 
 ## 1. Diagrama de Clases (MODP)
 
@@ -8,6 +8,13 @@ Los 5 diagramas modelan la **transacción principal del sistema: la Atención** 
 
 Clases esenciales: `Atencion`, `DetalleAtencion`, `Cliente`, `Barbero`, `Servicio`, `Producto`.
 Clases de soporte: `Turno`, `Usuario`, `Proveedor`, `Compra`, `DetalleCompra`, y las enumeraciones `EstadoAtencion` y `MedioPago`.
+
+Las enumeraciones **no fijan valores en el modelo**: los estados de la `Atencion` se describen en el diagrama de estados (sección 2) y los medios de pago se gestionan como datos de la aplicación, ya que pueden cambiar en el futuro.
+
+Justificación del diseño (observaciones de cátedra, 27/10):
+- El modelo de clases es **de estructura**: no listetypes tipos de servicio ni estados como clases o literales; esos valores pertenecen al diagrama de estados y a los datos (catálogo) del sistema.
+- Se validan **dos transacciones**: `Atencion` (el negocio presta el servicio al cliente, e incluye la venta de productos a través de `DetalleAtencion` → `Producto`) y `Compra` (el negocio compra a un proveedor externo; mediante `DetalleCompra` repone `Producto`).
+- La venta de un producto está incorporada a la atención: no existe una transacción aparte de "venta".
 
 Relaciones clave:
 - `Atencion` 1–1 con `Cliente` y `Barbero`; composición 1–\* con `DetalleAtencion`.
@@ -117,17 +124,9 @@ classDiagram
     }
     class MedioPago {
         <<enumeration>>
-        EFECTIVO
-        TRANSFERENCIA
-        DEBITO
     }
     class EstadoAtencion {
         <<enumeration>>
-        REGISTRADA
-        EN_PROCESO
-        FINALIZADA
-        PENDIENTE_PAGO
-        COBRADA
     }
     Atencion "1" --> "1" Cliente : es para
     Atencion "1" --> "1" Barbero : realiza
