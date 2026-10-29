@@ -167,14 +167,46 @@ stateDiagram-v2
 
 ## 3. Diagrama de Casos de Uso
 
-**Imágenes**: [`uml/use-case.png`](uml/use-case.png) · **Archivo editable**: [`uml/use-case.excalidraw`](uml/use-case.excalidraw) (se abre en excalidraw.com → File → Open)
-https://excalidraw.com/#json=_w6ei7RPjv4_yTnYMGhCo,uUvUaRZVeOZVbaAdoICs-g
+**Herramienta**: Mermaid (`usecase-beta`) · **Imagen**: [`uml/use-case.png`](uml/use-case.png) · **Fuente**: [`uml/use-case.mmd`](uml/use-case.mmd)
 
 Actores: **Cliente**, **Barbero** y **Administrador**. Foco en la interacción del usuario con la transacción principal:
 
-- *Barbero*: **Registrar atención** (RF03/RF04) → `<<include>>` **Cambiar estado** (RF04) y **Cobrar atención** (RF05).
+- *Barbero*: **Registrar atención** (RF03/RF04) → conduce a **Cambiar estado** (RF04) y **Cobrar atención** (RF05).
 - *Cliente*: Iniciar sesión, Solicitar turno, Cobrar (paga).
 - *Administrador*: Registrar cliente, Gestionar catálogo, Comprar insumos.
+
+Actor textual (formato `usecase-beta`):
+
+```mermaid
+usecase-beta
+direction LR
+actor Cliente("Cliente")
+actor Barbero("Barbero")
+actor Administrador("Administrador")
+
+systemBoundary "Estilo Córdoba"
+  IniciarSesion("Iniciar sesión")
+  SolicitarTurno("Solicitar turno")
+  RegistrarCliente("Registrar cliente")
+  GestionarCatalogo("Gestionar catálogo")
+  ComprarInsumos("Comprar insumos")
+  RegistrarAtencion("Registrar atención")
+  CambiarEstado("Cambiar estado de atención")
+  CobrarAtencion("Cobrar atención")
+end
+
+Cliente --> IniciarSesion
+Cliente --> SolicitarTurno
+Cliente --> CobrarAtencion
+Barbero --> IniciarSesion
+Barbero --> RegistrarAtencion
+Administrador --> IniciarSesion
+Administrador --> RegistrarAtencion
+Administrador --> GestionarCatalogo
+Administrador --> ComprarInsumos
+RegistrarAtencion --> CambiarEstado
+RegistrarAtencion --> CobrarAtencion
+```
 
 ## 4. Diagrama de Componentes
 

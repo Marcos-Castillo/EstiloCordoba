@@ -1,0 +1,28 @@
+usecase-beta
+direction LR
+actor Cliente("Cliente")
+actor Barbero("Barbero")
+actor Administrador("Administrador")
+
+systemBoundary "Estilo Córdoba"
+  IniciarSesion("Iniciar sesión")
+  SolicitarTurno("Solicitar turno")
+  RegistrarCliente("Registrar cliente")
+  GestionarCatalogo("Gestionar catálogo")
+  ComprarInsumos("Comprar insumos")
+  RegistrarAtencion("Registrar atención")
+  CambiarEstado("Cambiar estado de atención")
+  CobrarAtencion("Cobrar atención")
+end
+
+Cliente --> IniciarSesion
+Cliente --> SolicitarTurno
+Cliente --> CobrarAtencion
+Barbero --> IniciarSesion
+Barbero --> RegistrarAtencion
+Administrador --> IniciarSesion
+Administrador --> RegistrarAtencion
+Administrador --> GestionarCatalogo
+Administrador --> ComprarInsumos
+RegistrarAtencion --> CambiarEstado
+RegistrarAtencion --> CobrarAtencion
