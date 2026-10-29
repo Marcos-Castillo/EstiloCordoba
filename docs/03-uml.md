@@ -201,7 +201,7 @@ Cliente --> CobrarAtencion
 Barbero --> IniciarSesion
 Barbero --> RegistrarAtencion
 Administrador --> IniciarSesion
-Administrador --> RegistrarAtencion
+Administrador --> RegistrarCliente
 Administrador --> GestionarCatalogo
 Administrador --> ComprarInsumos
 RegistrarAtencion --> CambiarEstado
