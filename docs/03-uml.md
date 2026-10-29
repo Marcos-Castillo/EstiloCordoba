@@ -169,18 +169,16 @@ stateDiagram-v2
 
 **Herramienta**: Mermaid (`usecase-beta`) · **Imagen**: [`uml/use-case.png`](uml/use-case.png) · **Fuente**: [`uml/use-case.mmd`](uml/use-case.mmd)
 
-Actores: **Cliente**, **Barbero** y **Administrador**. Foco en la interacción del usuario con la transacción principal:
+Actores: **Barbero** y **Administrador** — ambos acceden al sistema. El **Cliente** no accede a la app: solicita turnos de manera presencial o digital vía WhatsApp (RF02) y los gestiones las registra el barbero. Foco en la interacción con la transacción principal:
 
-- *Barbero*: **Registrar atención** (RF03/RF04) → conduce a **Cambiar estado** (RF04) y **Cobrar atención** (RF05).
-- *Cliente*: Iniciar sesión, Solicitar turno, Cobrar (paga).
-- *Administrador*: Registrar cliente, Gestionar catálogo, Comprar insumos.
+- *Barbero*: Iniciar sesión, **Solicitar turno** (RF02), **Registrar atención** (RF03/RF04) y **Cobrar atención** (RF05).
+- *Administrador*: Iniciar sesión, **Registrar cliente**, **Gestionar catálogo** y **Comprar insumos**.
 
 Actor textual (formato `usecase-beta`):
 
 ```mermaid
 usecase-beta
 direction LR
-actor Cliente("Cliente")
 actor Barbero("Barbero")
 actor Administrador("Administrador")
 
@@ -191,21 +189,17 @@ systemBoundary "Estilo Córdoba"
   GestionarCatalogo("Gestionar catálogo")
   ComprarInsumos("Comprar insumos")
   RegistrarAtencion("Registrar atención")
-  CambiarEstado("Cambiar estado de atención")
   CobrarAtencion("Cobrar atención")
 end
 
-Cliente --> IniciarSesion
-Cliente --> SolicitarTurno
-Cliente --> CobrarAtencion
 Barbero --> IniciarSesion
+Barbero --> SolicitarTurno
 Barbero --> RegistrarAtencion
+Barbero --> CobrarAtencion
 Administrador --> IniciarSesion
 Administrador --> RegistrarCliente
 Administrador --> GestionarCatalogo
 Administrador --> ComprarInsumos
-RegistrarAtencion --> CambiarEstado
-RegistrarAtencion --> CobrarAtencion
 ```
 
 ## 4. Diagrama de Componentes

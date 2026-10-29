@@ -1,6 +1,5 @@
 usecase-beta
 direction LR
-actor Cliente("Cliente")
 actor Barbero("Barbero")
 actor Administrador("Administrador")
 
@@ -11,18 +10,14 @@ systemBoundary "Estilo Córdoba"
   GestionarCatalogo("Gestionar catálogo")
   ComprarInsumos("Comprar insumos")
   RegistrarAtencion("Registrar atención")
-  CambiarEstado("Cambiar estado de atención")
   CobrarAtencion("Cobrar atención")
 end
 
-Cliente --> IniciarSesion
-Cliente --> SolicitarTurno
-Cliente --> CobrarAtencion
 Barbero --> IniciarSesion
+Barbero --> SolicitarTurno
 Barbero --> RegistrarAtencion
+Barbero --> CobrarAtencion
 Administrador --> IniciarSesion
 Administrador --> RegistrarCliente
 Administrador --> GestionarCatalogo
 Administrador --> ComprarInsumos
-RegistrarAtencion --> CambiarEstado
-RegistrarAtencion --> CobrarAtencion
