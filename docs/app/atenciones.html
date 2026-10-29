@@ -23,7 +23,7 @@
       <section class="formulario-atencion">
         <h2>Registrar atención</h2>
 
-        <form id="formAtencion">
+        <form id="formAtencion" novalidate>
           <div class="campo">
             <label for="cliente">Nombre del cliente</label>
             <input id="cliente" name="cliente" type="text" required />
@@ -90,6 +90,7 @@
             <label for="cantidadProducto">Cantidad de productos</label>
             <input
               id="cantidadProducto"
+              name="cantidadProducto"
               type="number"
               min="0"
               step="1"

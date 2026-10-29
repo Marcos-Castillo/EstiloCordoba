@@ -203,6 +203,12 @@ function iniciarPagina() {
     const producto = campoProducto.value;
     const cantidadProducto = Number(campoCantidad.value || 0);
 
+    // TC-04: mensaje esperado cuando falta el cliente.
+    if (!cliente) {
+      mostrarMensaje("Debe seleccionar un cliente", true);
+      return;
+    }
+
     if (!nombreValido(cliente)) {
       mostrarMensaje("Debe seleccionar un cliente.", true);
       return;
