@@ -169,7 +169,7 @@ stateDiagram-v2
 
 **Herramienta**: Mermaid (`usecase-beta`) · **Imagen**: [`uml/use-case.png`](uml/use-case.png) · **Fuente**: [`uml/use-case.mmd`](uml/use-case.mmd)
 
-Actores: **Barbero** y **Administrador** — ambos acceden al sistema. El **Cliente** no accede a la app: solicita turnos de manera presencial o digital vía WhatsApp (RF02) y los gestiones las registra el barbero. Foco en la interacción con la transacción principal:
+Actores: **Barbero** y **Administrador** — ambos acceden al sistema. El **Cliente** no accede a la app: solicita turnos de manera presencial o digital vía WhatsApp (RF02) y esas gestiones las registra el barbero. Foco en la interacción con la transacción principal:
 
 - *Barbero*: Iniciar sesión, **Solicitar turno** (RF02), **Registrar atención** (RF03/RF04) y **Cobrar atención** (RF05).
 - *Administrador*: Iniciar sesión, **Registrar cliente**, **Gestionar catálogo** y **Comprar insumos**.
