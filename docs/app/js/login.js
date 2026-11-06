@@ -37,6 +37,9 @@ formulario.addEventListener("submit", function (evento) {
 
     localStorage.setItem("sesionEstiloCordoba", JSON.stringify(sesion));
 
+    // Deja la demo con atenciones y stock de ejemplo la primera vez.
+    sembrarDatosDemo();
+
     mensaje.textContent = "Ingreso correcto. Abriendo el panel...";
     mensaje.style.color = "green";
 

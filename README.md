@@ -27,6 +27,17 @@
 | admin | admin123 | Administrador |
 | barbero | barbero123 | Barbero |
 
+### Reportes (solo Administrador)
+
+Ingresando con el perfil **Administrador** aparece la sección **"Reportes e indicadores"**, con los dos reportes principales:
+
+- **Recaudación del día por medio de pago** (Efectivo, Transferencia, Débito) — gráfico de dona con [Chart.js](https://www.chartjs.org/).
+- **Atenciones de los últimos 7 días** — gráfico de barras.
+
+Incluye además las tarjetas de indicadores (atenciones del día, recaudación del día y productos con stock bajo) y la tabla de **stock bajo** (productos con menos de 5 unidades).
+
+La demo **siembra datos de ejemplo la primera vez** que se inicia sesión (atenciones de los últimos 7 días y stock con productos bajos), para que los reportes se vean completos sin cargar datos a mano. Para reiniciar la demo: borrar de `localStorage` las claves `atencionesEstiloCordoba`, `stockEstiloCordoba` y `demoEstiloCordoba`.
+
 ## Estructura
 
 - `Consigna.html` — consigna del trabajo

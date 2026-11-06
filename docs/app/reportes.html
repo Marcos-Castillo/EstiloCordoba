@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reportes e indicadores | Estilo Córdoba</title>
+    <link rel="stylesheet" href="css/reportes.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Barbería Estilo Córdoba</h1>
+      <p>Sistema de gestión</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Reportes e indicadores</h2>
+        <p>Usuario: <strong id="nombreUsuario">Administrador</strong></p>
+        <p>Perfil: <strong id="rolUsuario">Administrador</strong></p>
+      </section>
+
+      <section>
+        <h2>Resumen del día</h2>
+        <div class="indicadores">
+          <article class="indicador">
+            <span class="valor" id="atencionesHoy">0</span>
+            <span class="etiqueta">Atenciones del día</span>
+          </article>
+          <article class="indicador">
+            <span class="valor" id="recaudacionHoy">$ 0,00</span>
+            <span class="etiqueta">Recaudación del día</span>
+          </article>
+          <article class="indicador">
+            <span class="valor" id="productosBajos">0</span>
+            <span class="etiqueta">Productos con stock bajo</span>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Recaudación por medio de pago (hoy)</h2>
+        <div class="grafico">
+          <canvas id="graficoMedios" aria-label="Recaudación por medio de pago"></canvas>
+        </div>
+        <p class="sin-datos" id="sinDatosMedios" hidden>
+          Todavía no hay cobros registrados hoy.
+        </p>
+      </section>
+
+      <section>
+        <h2>Atenciones de los últimos 7 días</h2>
+        <div class="grafico">
+          <canvas
+            id="graficoAtenciones"
+            aria-label="Atenciones de los últimos 7 días"
+          ></canvas>
+        </div>
+        <p class="sin-datos" id="sinDatosAtenciones" hidden>
+          Todavía no hay atenciones registradas.
+        </p>
+      </section>
+
+      <section>
+        <h2>Stock bajo</h2>
+        <p>Productos con stock menor a 5 unidades.</p>
+        <div class="tabla-contenedor">
+          <table aria-label="Productos con stock bajo">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody id="listaStockBajo"></tbody>
+          </table>
+        </div>
+        <p class="sin-datos" id="sinStockBajo" hidden>
+          No hay productos con stock bajo.
+        </p>
+      </section>
+
+      <div class="acciones">
+        <button type="button" id="volverPanel">Volver al panel</button>
+        <button type="button" id="cerrarSesion">Cerrar sesión</button>
+      </div>
+    </main>
+
+    <script src="js/vendor/chart.umd.min.js"></script>
+    <script src="js/demo-data.js"></script>
+    <script src="js/reportes.js"></script>
+  </body>
+</html>
