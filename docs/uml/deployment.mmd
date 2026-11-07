@@ -1,0 +1,9 @@
+flowchart LR
+    Repo["«artifact»<br/>Repositorio GitHub<br/>(rama main)"]
+    CI["«node»<br/>GitHub Actions<br/>CI: validación HTML/JS"]
+    Pages["«execution environment»<br/>GitHub Pages<br/>publicación automática"]
+    Nav["«device»<br/>Navegador del usuario<br/>SPA + localStorage"]
+
+    Repo -->|push a main| CI
+    Repo -->|deploy automático| Pages
+    Pages -->|HTTPS| Nav

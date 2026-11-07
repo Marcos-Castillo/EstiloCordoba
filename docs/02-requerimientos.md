@@ -29,14 +29,14 @@ Leyenda de prioridad (MoSCoW): **M** = Must, **S** = Should, **C** = Could.
 
 | ID | Categoría | Descripción | Prioridad |
 |---|---|---|---|
-| **RNF01** | Usabilidad | Interfaz web en español, responsive (Bootstrap 5), operable por personal no técnico con máximo 3 clics para las operaciones frecuentes. | M |
+| **RNF01** | Usabilidad | Interfaz web en español, responsive, con estilos propios y login sobre Bootstrap 5, operable por personal no técnico con máximo 3 clics para las operaciones frecuentes. | M |
 | **RNF02** | Compatibilidad | Funcionar en los navegadores modernos (Chrome, Firefox, Edge ≥ versión 2022) sin dependencias de backend ni instalación local. | M |
-| **RNF03** | Persistencia | Los datos persisten en el almacenamiento del navegador (`localStorage`) y sobreviven al cierre de la sesión/pestaña; exportar/importar datos en JSON. | M |
+| **RNF03** | Persistencia | Los datos persisten en el almacenamiento del navegador (`localStorage`) y sobreviven al cierre de la sesión o de la pestaña. | M |
 | **RNF04** | Rendimiento | Toda operación CRUD responde en menos de 1 segundo con hasta 5.000 registros en almacenamiento local. | M |
-| **RNF05** | Seguridad | Acceso mediante login; las funcionalidades según rol del usuario; no se almacenan ni transmiten credenciales en texto plano (hash). | M |
-| **RNF06** | CI/CD | El repositorio debe validar automáticamente cada push (lint/build) y publicar la app en GitHub Pages al integrar `main`. | M |
+| **RNF05** | Seguridad | Acceso mediante login con roles (administrador y barbero). En esta instancia demo las credenciales son usuarios de prueba embebidos y la sesión guardada no incluye la contraseña; para producción se prevé el hash de credenciales. | M |
+| **RNF06** | CI/CD | El repositorio valida automáticamente cada push mediante un workflow de CI y publica la app en GitHub Pages al integrar `main`. | M |
 | **RNF07** | Mantenibilidad | Código JavaScript modular por dominio, sin dependencias externas de npm para el frontend, con convenciones de nombres consistentes. | S |
-| **RNF08** | Escalabilidad | La capa de acceso a datos debe estar aislada del resto de la UI para permitir migrar de `localStorage` a un backend futuro sin reescribir la interfaz. | S |
+| **RNF08** | Escalabilidad | La persistencia se encapsula en funciones de lectura y escritura por dominio, de modo que pueda reemplazarse `localStorage` por un backend futuro sin reescribir la interfaz. | S |
 
 ## Referencia cruzada RF ↔ Épicas (para Jira)
 

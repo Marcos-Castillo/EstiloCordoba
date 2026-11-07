@@ -12,7 +12,7 @@ Clases de soporte: `Turno`, `Usuario`, `Proveedor`, `Compra`, `DetalleCompra`, y
 Las enumeraciones **no fijan valores en el modelo**: los estados de la `Atencion` se describen en el diagrama de estados (sección 2) y los medios de pago se gestionan como datos de la aplicación, ya que pueden cambiar en el futuro.
 
 Justificación del diseño (observaciones de cátedra, 27/10):
-- El modelo de clases es **de estructura**: no listetypes tipos de servicio ni estados como clases o literales; esos valores pertenecen al diagrama de estados y a los datos (catálogo) del sistema.
+- El modelo de clases es **de estructura**: no lista tipos de servicio ni estados como clases o literales; esos valores pertenecen al diagrama de estados y a los datos (catálogo) del sistema.
 - Se validan **dos transacciones**: `Atencion` (el negocio presta el servicio al cliente, e incluye la venta de productos a través de `DetalleAtencion` → `Producto`) y `Compra` (el negocio compra a un proveedor externo; mediante `DetalleCompra` repone `Producto`).
 - La venta de un producto está incorporada a la atención: no existe una transacción aparte de "venta".
 
@@ -146,7 +146,7 @@ classDiagram
 
 **Herramienta**: StarUML 7 · **Imagen**: [`uml/state-diagram.png`](uml/state-diagram.png) · **Fuente**: [`uml/state-diagram.mmd`](uml/state-diagram.mmd)
 
-Ciclo de vida según el enunciado: **Registrada → En proceso → Finalizada → Pendiente de pago → Cobrada**.
+Ciclo de vida según el enunciado: **Registrada → En proceso → Finalizada → Pendiente de pago → Cobrada**. El cobro se registra desde el estado *Pendiente de pago*, tal como lo exige la aplicación.
 
 ```mermaid
 stateDiagram-v2
@@ -159,7 +159,6 @@ stateDiagram-v2
     registrada --> enProceso : iniciarProceso()
     enProceso --> finalizada : finalizarServicios()
     finalizada --> pendientePago : confirmarPendienteDePago()
-    finalizada --> cobrada : cobrar(medioPago)
     pendientePago --> cobrada : cobrar(medioPago)
     registrada --> [*] : cancelarAntesDeIniciar()
     cobrada --> [*] : archivar()
@@ -204,19 +203,24 @@ Administrador --> ComprarInsumos
 
 ## 4. Diagrama de Componentes
 
-**Imágenes**: [`uml/components-deployment.png`](uml/components-deployment.png) · **Archivo editable**: [`uml/componentes-despliegue.excalidraw`](uml/componentes-despliegue.excalidraw) (se abre en excalidraw.com → File → Open)
-https://excalidraw.com/#json=p0evWtdkZ2UVvPCIHbEuZ,qsQEZygyoDWx2jmWCw0yOA
+![Diagrama de componentes](uml/components.png)
+
+**Imagen**: [`uml/components.png`](uml/components.png) · **Fuente editable**: [`uml/components.mmd`](uml/components.mmd) (Mermaid)
+
 Arquitectura en capas de la SPA:
-1. **Presentación**: Login UI, Clientes UI, Turnos UI, Atenciones UI, Catálogo UI (HTML + Bootstrap 5).
-2. **Lógica**: controladores JavaScript por dominio (`AuthController`, `ClientesController`, `TurnosController`, `AtencionesController`, `CatalogoController`). `AtencionesController` es el componente de la transacción principal.
+1. **Presentación**: Login UI, Atenciones e historial UI, Clientes UI, Proveedores y compras UI, Reportes UI (HTML + CSS propio y Bootstrap 5 para el login).
+2. **Lógica**: controladores JavaScript por dominio (`AuthController`, `AtencionesController`, `ClientesController`, `ComprasController`, `ReportesController`). `AtencionesController` es el componente de la transacción principal.
 3. **Acceso a datos**: `StorageService` — única puerta hacia la persistencia (abstracción para migrar a backend futuro, RNF08).
 4. **Datos**: `localStorage` del navegador (JSON).
+5. **Fuera del MVP**: turnos y catálogo de servicios quedan planificados (recuadro punteado).
 
 ## 5. Diagrama de Despliegue
 
-**Imágenes**: [`uml/components-deployment.png`](uml/components-deployment.png) · **Archivo editable**: [`uml/componentes-despliegue.excalidraw`](uml/componentes-despliegue.excalidraw) (se abre en excalidraw.com → File → Open)
-https://excalidraw.com/#json=p0evWtdkZ2UVvPCIHbEuZ,qsQEZygyoDWx2jmWCw0yOA
+![Diagrama de despliegue](uml/deployment.png)
+
+**Imagen**: [`uml/deployment.png`](uml/deployment.png) · **Fuente editable**: [`uml/deployment.mmd`](uml/deployment.mmd) (Mermaid)
+
 - `«device»` Navegador del usuario: ejecuta la SPA + `localStorage`.
 - `«execution environment»` **GitHub Pages**: sirve la app estática por HTTPS.
-- `«node»` **GitHub Actions (CI/CD)**: valida (lint/build) en cada push y despliega a Pages (RNF06).
-- `«artifact»` **Repositorio GitHub** (`main`): código fuente que dispara el pipeline.
+- `«node»` **GitHub Actions**: ejecuta la validación de HTML/JS en cada push a `main` (CI, RNF06).
+- `«artifact»` **Repositorio GitHub** (`main`): código fuente; GitHub Pages publica automáticamente desde esa rama al integrar cambios.

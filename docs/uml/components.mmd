@@ -1,0 +1,36 @@
+flowchart LR
+    subgraph Presentacion["Capa de presentación"]
+        LoginUI["Login UI"]
+        AtencionesUI["Atenciones e historial UI"]
+        ClientesUI["Clientes UI"]
+        ComprasUI["Proveedores y compras UI"]
+        ReportesUI["Reportes UI"]
+    end
+
+    subgraph Logica["Capa lógica (JavaScript)"]
+        AuthC["AuthController"]
+        AtencionesC["AtencionesController"]
+        ClientesC["ClientesController"]
+        ComprasC["ComprasController"]
+        ReportesC["ReportesController"]
+    end
+
+    subgraph Datos["Acceso a datos"]
+        Storage["StorageService (localStorage JSON)"]
+    end
+
+    LoginUI --> AuthC
+    AtencionesUI --> AtencionesC
+    ClientesUI --> ClientesC
+    ComprasUI --> ComprasC
+    ReportesUI --> ReportesC
+
+    AuthC --> Storage
+    AtencionesC --> Storage
+    ClientesC --> Storage
+    ComprasC --> Storage
+    ReportesC --> Storage
+
+    Planificados["Turnos y catálogo: planificados (fuera del MVP)"]
+    classDef planificado stroke-dasharray: 5 5
+    class Planificados planificado

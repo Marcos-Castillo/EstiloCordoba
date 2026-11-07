@@ -12,7 +12,7 @@ Proveer a la barbería un sistema que **gestione de manera eficiente y centraliz
 2. **Turnos**: gestionar la agenda de citas previas solicitadas de manera presencial o digital (WhatsApp), registrando fecha, hora, cliente y servicio principal.
 3. **Atenciones (transacción principal)**: registrar cada atención con el barbero asignado, el cliente atendido, los servicios prestados y la venta opcional de productos, calculando el monto total a cobrar y el medio de pago.
 4. **Ciclo de vida de la atención**: controlar los estados de la atención (Registrada, En proceso, Finalizada, Pendiente de pago, Cobrada).
-5. **Catálogo**: administrar los servicios oferecidos (nombre, categoría, duración estimada y precio) y los productos de cuidado personal (nombre, marca, precio de venta y stock).
+5. **Catálogo**: administrar los servicios ofrecidos (nombre, categoría, duración estimada y precio) y los productos de cuidado personal (nombre, marca, precio de venta y stock).
 6. **Stock y compras**: registrar las compras de insumos y productos a proveedores, manteniendo la disponibilidad de stock para la operación diaria.
 7. **Proveedores**: administrar los datos de los proveedores (razón social, CUIT, teléfono, correo y dirección comercial).
 8. **Seguridad**: autenticar a los usuarios del sistema (administrador/barbero) y restringir las operaciones según su rol.
@@ -20,14 +20,14 @@ Proveer a la barbería un sistema que **gestione de manera eficiente y centraliz
 ## 3. Alcance del software
 
 ### Dentro del alcance
-- ABMC de clientes, servicios, productos, proveedores y comprás.
+- ABMC de clientes, servicios, productos, proveedores y compras.
 - Gestión de turnos (agenda).
 - Registro de la atención con detalle de servicios y productos.
 - Gestión de estados de la atención y su cobro.
 - Cálculo de montos y registro de medios de pago (efectivo, transferencia, débito).
 - Descuento automático de stock por venta de productos en atenciones.
 - Login con roles de usuario.
-- Dashboard con indicadores basicos del negocio.
+- Dashboard con indicadores básicos del negocio.
 
 ### Fuera del alcance
 - Facturación fiscal electrónica (AFIP).

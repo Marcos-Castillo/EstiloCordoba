@@ -11,7 +11,6 @@ stateDiagram-v2
     registrada --> enProceso : iniciarProceso()
     enProceso --> finalizada : finalizarServicios()
     finalizada --> pendientePago : confirmarPendienteDePago()
-    finalizada --> cobrada : cobrar(medioPago)
     pendientePago --> cobrada : cobrar(medioPago)
     pendientePago --> cobrada : registrarTransferenciaDebito()
     registrada --> [*] : cancelarAntesDeIniciar()
