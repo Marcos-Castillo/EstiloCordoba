@@ -2,9 +2,9 @@
 
 > Contenido preparado para cargar en **Zephyr** del proyecto Jira **ES**.
 > Pasos para activar Zephyr: Jira → Apps → "Zephyr" (o Zephyr Scale) → agregar al proyecto ES.
-> Estructura sugerida: **Test Cycle "Sprint 1 — Documentación/MVP"** + los casos de abajo.
+> Estructura usada: **Test Cycles ES-R1 a ES-R4**. La ejecución final corresponde a **ES-R4 — Regresión Sprint 2**, del 07/11/2026, con **12/12 casos Passed**.
 
-## MVP bajo prueba (Sprint 0/1)
+## MVP bajo prueba (Sprint 2)
 
 - RF11 Login con roles · RF03 Registro de atención · RF04 Ciclo de vida de la atención · RF05 Cobro · RF08 Descuento de stock
 
@@ -108,6 +108,29 @@
 | 1 | Ir a Compras y dejar el proveedor sin seleccionar | Aviso "Seleccioná un proveedor"; no se registra la compra |
 | 2 | Elegir proveedor y producto, pero indicar cantidad 0 | Aviso "La cantidad debe ser un entero mayor que cero"; el stock no cambia |
 
+## TC-11 · Dashboard de reportes e indicadores (RF14)
+
+**Precondiciones**: sesión de administrador; datos demo cargados con al menos una atención cobrada.
+
+| # | Paso | Resultado esperado |
+|---|---|---|
+| 1 | Ingresar como admin y abrir Reportes | Se muestra el dashboard con los indicadores del día |
+| 2 | Verificar el gráfico de recaudación por medio de pago | El gráfico de dona se renderiza con Efectivo, Transferencia y Débito |
+| 3 | Verificar el gráfico de atenciones de los últimos 7 días | El gráfico de barras se renderiza |
+| 4 | Verificar la tabla de stock bajo | Se listan los productos con menos de 5 unidades |
+
+## TC-12 · Control de acceso por rol (RF11)
+
+**Precondiciones**: sesión iniciada como Barbero.
+
+| # | Paso | Resultado esperado |
+|---|---|---|
+| 1 | Abrir admin.html | Redirección a login.html |
+| 2 | Abrir clientes.html | Redirección a login.html |
+| 3 | Abrir proveedores.html | Redirección a login.html |
+| 4 | Abrir compras.html | Redirección a login.html |
+| 5 | Abrir reportes.html | Redirección a login.html |
+
 ---
 
 ## Mapa TC ↔ HU Jira
@@ -119,18 +142,22 @@
 | TC-07 | ES-17 — Clientes (ABMC) |
 | TC-08 | ES-20 — Historial de atenciones con filtros |
 | TC-09, TC-10 | ES-21 — Proveedores y compras |
+| TC-11 | ES-22 — Dashboard de indicadores |
+| TC-12 | ES-5 — Seguridad y Tecnología (control de acceso) |
 
-## Registro de ejecución (completar en Zephyr)
+## Registro de ejecución — ciclo ES-R4 (07/11/2026)
 
 | TC | Estado Ejecución | Ejecutado por | Fecha | Evidencia |
 |---|---|---|---|---|
-| TC-01 | (Passed/Failed — en Zephyr) | | | |
-| TC-02 | | | | |
-| TC-03 | | | | |
-| TC-04 | | | | |
-| TC-05 | | | | |
-| TC-06 | | | | |
-| TC-07 | | | | |
-| TC-08 | | | | |
-| TC-09 | | | | |
-| TC-10 | | | | |
+| TC-01 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E15 |
+| TC-02 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E16 |
+| TC-03 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E17 |
+| TC-04 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E18 |
+| TC-05 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E19 |
+| TC-06 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E20 |
+| TC-07 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E21 |
+| TC-08 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E22 |
+| TC-09 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E23 |
+| TC-10 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E24 |
+| TC-11 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E25 |
+| TC-12 | Passed | Equipo Estilo Córdoba | 07/11/2026 | Zephyr ES-R4 · ES-E26 |
