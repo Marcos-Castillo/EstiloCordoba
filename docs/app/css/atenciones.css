@@ -136,3 +136,58 @@ tbody tr:hover {
   opacity: 0.45;
   cursor: not-allowed;
 }
+
+.filtros {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  gap: 16px;
+  align-items: end;
+  margin: 20px 0 22px;
+  padding: 20px;
+  background: var(--panel, #1b1d20);
+  border: 1px solid var(--borde, #33363b);
+  border-radius: 12px;
+}
+
+.filtros-acciones {
+  display: flex;
+  align-items: flex-end;
+}
+
+.boton-secundario {
+  border-color: var(--borde, #33363b);
+  background: transparent;
+  color: var(--texto, #f5f2ec);
+  white-space: nowrap;
+}
+
+.boton-secundario:hover {
+  border-color: var(--dorado, #d4ad65);
+  color: var(--dorado, #d4ad65);
+}
+
+.sin-resultados {
+  margin: 0 0 16px;
+  padding: 16px;
+  background: var(--panel, #1b1d20);
+  border: 1px solid var(--borde, #33363b);
+  border-radius: 10px;
+  color: var(--texto-secundario, #b9b3a6);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .filtros {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filtros-acciones {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 650px) {
+  .filtros {
+    grid-template-columns: 1fr;
+  }
+}

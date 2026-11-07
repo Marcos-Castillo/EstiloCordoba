@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proveedores | Estilo Córdoba</title>
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/gestion.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Barbería Estilo Córdoba</h1>
+      <p>Sistema de gestión</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Proveedores</h2>
+        <p>Usuario: <strong id="nombreUsuario"></strong></p>
+        <p>Perfil: <strong id="rolUsuario"></strong></p>
+      </section>
+
+      <section class="formulario-gestion">
+        <h2 id="tituloFormulario">Registrar proveedor</h2>
+
+        <form id="formProveedor" class="form-grilla" novalidate>
+          <div class="campo">
+            <label for="razonSocial">Razón social</label>
+            <input id="razonSocial" name="razonSocial" type="text" required />
+          </div>
+
+          <div class="campo">
+            <label for="cuit">CUIT</label>
+            <input
+              id="cuit"
+              name="cuit"
+              type="text"
+              inputmode="numeric"
+              placeholder="30-71234567-8"
+              required
+            />
+          </div>
+
+          <div class="campo">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" name="telefono" type="tel" />
+          </div>
+
+          <div class="campo">
+            <label for="correo">Correo electrónico</label>
+            <input id="correo" name="correo" type="email" />
+          </div>
+
+          <div class="campo campo-ancho">
+            <label for="direccion">Dirección comercial</label>
+            <input id="direccion" name="direccion" type="text" />
+          </div>
+
+          <div class="form-acciones">
+            <button type="submit" id="botonGuardar">Guardar proveedor</button>
+            <button
+              type="button"
+              id="cancelarEdicion"
+              class="boton-secundario"
+              hidden
+            >
+              Cancelar edición
+            </button>
+            <p id="mensaje" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+
+      <section>
+        <h2>Proveedores registrados</h2>
+        <div class="tabla-contenedor">
+          <table aria-label="Proveedores registrados">
+            <thead>
+              <tr>
+                <th>Proveedor</th>
+                <th>CUIT</th>
+                <th>Contacto</th>
+                <th>Dirección</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="listaProveedores"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <button type="button" id="volverPanel">Volver al panel</button>
+      <button type="button" id="cerrarSesion">Cerrar sesión</button>
+    </main>
+
+    <script src="js/demo-data.js"></script>
+    <script src="js/proveedores.js"></script>
+  </body>
+</html>

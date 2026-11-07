@@ -51,6 +51,7 @@ function asegurarStockInicial() {
 }
 
 function iniciarPagina() {
+  if (typeof sembrarDatosDemo === "function") sembrarDatosDemo();
   asegurarStockInicial();
 
   const formulario = document.getElementById("formAtencion");
@@ -65,6 +66,39 @@ function iniciarPagina() {
   const campoTotal = document.getElementById("total");
   const campoMensaje = document.getElementById("mensaje");
   const listaAtenciones = document.getElementById("listaAtenciones");
+  const filtroCliente = document.getElementById("filtroCliente");
+  const filtroBarbero = document.getElementById("filtroBarbero");
+  const filtroFecha = document.getElementById("filtroFecha");
+  const filtroEstado = document.getElementById("filtroEstado");
+  const sinResultados = document.getElementById("sinResultados");
+
+  function cargarOpcionesClientes() {
+    const clientes = JSON.parse(
+      localStorage.getItem("clientesEstiloCordoba") || "[]",
+    ).sort((a, b) => {
+      const apellido = a.apellido.localeCompare(b.apellido, "es");
+      return apellido !== 0 ? apellido : a.nombre.localeCompare(b.nombre, "es");
+    });
+
+    campoCliente.replaceChildren();
+
+    const vacio = document.createElement("option");
+    vacio.value = "";
+    vacio.textContent =
+      clientes.length > 0
+        ? "Seleccioná un cliente"
+        : "No hay clientes registrados";
+    campoCliente.appendChild(vacio);
+
+    clientes.forEach((cliente) => {
+      const opcion = document.createElement("option");
+      opcion.value = `${cliente.nombre} ${cliente.apellido}`;
+      opcion.textContent = `${cliente.apellido}, ${cliente.nombre} — ${cliente.tipoDocumento} ${cliente.numeroDocumento}`;
+      campoCliente.appendChild(opcion);
+    });
+  }
+
+  cargarOpcionesClientes();
 
   document.getElementById("nombreUsuario").textContent =
     sesion.nombre || sesion.usuario || "Usuario";
@@ -209,11 +243,6 @@ function iniciarPagina() {
       return;
     }
 
-    if (!nombreValido(cliente)) {
-      mostrarMensaje("Debe seleccionar un cliente.", true);
-      return;
-    }
-
     if (!nombreValido(barbero)) {
       mostrarMensaje("Ingresá un nombre válido para el barbero.", true);
       return;
@@ -332,9 +361,59 @@ function iniciarPagina() {
     renderizarAtenciones();
   });
 
+  function actualizarOpcionesFiltros(atenciones) {
+    const clienteActual = filtroCliente.value;
+    const barberoActual = filtroBarbero.value;
+
+    const clientes = [...new Set(atenciones.map((item) => item.cliente))].sort(
+      (a, b) => a.localeCompare(b, "es"),
+    );
+    const barberos = [...new Set(atenciones.map((item) => item.barbero))].sort(
+      (a, b) => a.localeCompare(b, "es"),
+    );
+
+    filtroCliente.replaceChildren(new Option("Todos", ""));
+    clientes.forEach((cliente) => {
+      filtroCliente.appendChild(new Option(cliente, cliente));
+    });
+
+    filtroBarbero.replaceChildren(new Option("Todos", ""));
+    barberos.forEach((barbero) => {
+      filtroBarbero.appendChild(new Option(barbero, barbero));
+    });
+
+    filtroCliente.value = clientes.includes(clienteActual)
+      ? clienteActual
+      : "";
+    filtroBarbero.value = barberos.includes(barberoActual)
+      ? barberoActual
+      : "";
+  }
+
+  function atencionesFiltradas(atenciones) {
+    return atenciones.filter((atencion) => {
+      const coincideCliente =
+        !filtroCliente.value || atencion.cliente === filtroCliente.value;
+      const coincideBarbero =
+        !filtroBarbero.value || atencion.barbero === filtroBarbero.value;
+      const coincideFecha =
+        !filtroFecha.value || atencion.fecha === filtroFecha.value;
+      const coincideEstado =
+        !filtroEstado.value || atencion.estado === filtroEstado.value;
+
+      return (
+        coincideCliente && coincideBarbero && coincideFecha && coincideEstado
+      );
+    });
+  }
+
   function renderizarAtenciones() {
     const atenciones = leerAtenciones();
+    actualizarOpcionesFiltros(atenciones);
+
+    const visibles = atencionesFiltradas(atenciones);
     listaAtenciones.replaceChildren();
+    sinResultados.hidden = visibles.length > 0;
 
     function textoEstado(atencion) {
       if (atencion.estado !== "Cobrada" || !atencion.fechaCobro) {
@@ -351,7 +430,7 @@ function iniciarPagina() {
         .join(" · ");
     }
 
-    atenciones.forEach((atencion) => {
+    visibles.forEach((atencion) => {
       const fila = document.createElement("tr");
 
       [
@@ -464,6 +543,20 @@ function iniciarPagina() {
   document.getElementById("cerrarSesion").addEventListener("click", () => {
     localStorage.removeItem(CLAVE_SESION);
     window.location.href = "login.html";
+  });
+
+  [filtroCliente, filtroBarbero, filtroFecha, filtroEstado].forEach(
+    (control) => {
+      control.addEventListener("change", renderizarAtenciones);
+    },
+  );
+
+  document.getElementById("limpiarFiltros").addEventListener("click", () => {
+    filtroCliente.value = "";
+    filtroBarbero.value = "";
+    filtroFecha.value = "";
+    filtroEstado.value = "";
+    renderizarAtenciones();
   });
 
   renderizarAtenciones();

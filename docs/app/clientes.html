@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clientes | Estilo Córdoba</title>
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/gestion.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Barbería Estilo Córdoba</h1>
+      <p>Sistema de gestión</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Clientes</h2>
+        <p>Usuario: <strong id="nombreUsuario"></strong></p>
+        <p>Perfil: <strong id="rolUsuario"></strong></p>
+      </section>
+
+      <section class="formulario-gestion">
+        <h2 id="tituloFormulario">Registrar cliente</h2>
+
+        <form id="formCliente" class="form-grilla" novalidate>
+          <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" required />
+          </div>
+
+          <div class="campo">
+            <label for="apellido">Apellido</label>
+            <input id="apellido" name="apellido" type="text" required />
+          </div>
+
+          <div class="campo">
+            <label for="tipoDocumento">Tipo de documento</label>
+            <select id="tipoDocumento" name="tipoDocumento" required>
+              <option value="">Seleccioná una opción</option>
+              <option value="DNI">DNI</option>
+              <option value="CUIL">CUIL</option>
+              <option value="Pasaporte">Pasaporte</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="numeroDocumento">Número de documento</label>
+            <input
+              id="numeroDocumento"
+              name="numeroDocumento"
+              type="text"
+              inputmode="numeric"
+              required
+            />
+          </div>
+
+          <div class="campo">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" name="telefono" type="tel" />
+          </div>
+
+          <div class="campo">
+            <label for="correo">Correo electrónico</label>
+            <input id="correo" name="correo" type="email" />
+          </div>
+
+          <div class="campo">
+            <label for="localidad">Localidad</label>
+            <input id="localidad" name="localidad" type="text" />
+          </div>
+
+          <div class="campo">
+            <label for="redesSociales">Redes sociales</label>
+            <input
+              id="redesSociales"
+              name="redesSociales"
+              type="text"
+              placeholder="Instagram: @usuario"
+            />
+          </div>
+
+          <div class="campo campo-ancho campo-checkbox">
+            <input
+              id="programaBeneficios"
+              name="programaBeneficios"
+              type="checkbox"
+            />
+            <label for="programaBeneficios"
+              >Incluir en el programa de beneficios</label
+            >
+          </div>
+
+          <div class="form-acciones">
+            <button type="submit" id="botonGuardar">Guardar cliente</button>
+            <button
+              type="button"
+              id="cancelarEdicion"
+              class="boton-secundario"
+              hidden
+            >
+              Cancelar edición
+            </button>
+            <p id="mensaje" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+
+      <section>
+        <h2>Clientes registrados</h2>
+        <div class="tabla-contenedor">
+          <table aria-label="Clientes registrados">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Documento</th>
+                <th>Contacto</th>
+                <th>Localidad</th>
+                <th>Beneficios</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="listaClientes"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <button type="button" id="volverPanel">Volver al panel</button>
+      <button type="button" id="cerrarSesion">Cerrar sesión</button>
+    </main>
+
+    <script src="js/demo-data.js"></script>
+    <script src="js/clientes.js"></script>
+  </body>
+</html>

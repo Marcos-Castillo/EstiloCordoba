@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compras | Estilo Córdoba</title>
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/gestion.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Barbería Estilo Córdoba</h1>
+      <p>Sistema de gestión</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Compras de insumos</h2>
+        <p>Usuario: <strong id="nombreUsuario"></strong></p>
+        <p>Perfil: <strong id="rolUsuario"></strong></p>
+      </section>
+
+      <section class="formulario-gestion">
+        <h2>Registrar compra</h2>
+
+        <form id="formCompra" class="form-grilla" novalidate>
+          <div class="campo">
+            <label for="proveedor">Proveedor</label>
+            <select id="proveedor" name="proveedor" required>
+              <option value="">Seleccioná un proveedor</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="producto">Producto</label>
+            <select id="producto" name="producto" required>
+              <option value="">Seleccioná un producto</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="cantidad">Cantidad</label>
+            <input
+              id="cantidad"
+              name="cantidad"
+              type="number"
+              min="1"
+              step="1"
+              value="1"
+              required
+            />
+          </div>
+
+          <div class="campo">
+            <label for="costoUnitario">Costo unitario ($)</label>
+            <input
+              id="costoUnitario"
+              name="costoUnitario"
+              type="number"
+              min="0"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <div class="campo">
+            <label for="fecha">Fecha</label>
+            <input id="fecha" name="fecha" type="date" required />
+          </div>
+
+          <div class="campo">
+            <label for="stockActual">Stock actual del producto</label>
+            <input id="stockActual" type="text" readonly value="—" />
+          </div>
+
+          <p class="total">
+            Total de la compra: <strong id="totalCompra">$0,00</strong>
+          </p>
+
+          <div class="form-acciones">
+            <button type="submit">Registrar compra</button>
+            <p id="mensaje" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+
+      <section>
+        <h2>Compras registradas</h2>
+        <div class="tabla-contenedor">
+          <table aria-label="Compras registradas">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Proveedor</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Costo unitario</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="listaCompras"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <button type="button" id="volverPanel">Volver al panel</button>
+      <button type="button" id="cerrarSesion">Cerrar sesión</button>
+    </main>
+
+    <script src="js/demo-data.js"></script>
+    <script src="js/compras.js"></script>
+  </body>
+</html>

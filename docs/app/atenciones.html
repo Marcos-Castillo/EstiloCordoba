@@ -25,8 +25,10 @@
 
         <form id="formAtencion" novalidate>
           <div class="campo">
-            <label for="cliente">Nombre del cliente</label>
-            <input id="cliente" name="cliente" type="text" required />
+            <label for="cliente">Cliente</label>
+            <select id="cliente" name="cliente" required>
+              <option value="">Seleccioná un cliente</option>
+            </select>
           </div>
 
           <div class="campo">
@@ -107,6 +109,50 @@
 
       <section>
         <h2>Atenciones registradas</h2>
+
+        <div class="filtros" aria-label="Filtros del historial de atenciones">
+          <div class="campo">
+            <label for="filtroCliente">Cliente</label>
+            <select id="filtroCliente">
+              <option value="">Todos</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="filtroBarbero">Barbero</label>
+            <select id="filtroBarbero">
+              <option value="">Todos</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="filtroFecha">Fecha</label>
+            <input id="filtroFecha" type="date" />
+          </div>
+
+          <div class="campo">
+            <label for="filtroEstado">Estado</label>
+            <select id="filtroEstado">
+              <option value="">Todos</option>
+              <option value="Registrada">Registrada</option>
+              <option value="En proceso">En proceso</option>
+              <option value="Finalizada">Finalizada</option>
+              <option value="Pendiente de pago">Pendiente de pago</option>
+              <option value="Cobrada">Cobrada</option>
+            </select>
+          </div>
+
+          <div class="filtros-acciones">
+            <button type="button" id="limpiarFiltros" class="boton-secundario">
+              Limpiar filtros
+            </button>
+          </div>
+        </div>
+
+        <p id="sinResultados" class="sin-resultados" role="status" hidden>
+          Sin resultados
+        </p>
+
         <div class="tabla-contenedor">
           <table>
             <thead>
@@ -129,6 +175,7 @@
       <button type="button" id="cerrarSesion">Cerrar sesión</button>
     </main>
 
+    <script src="js/demo-data.js"></script>
     <script src="js/atenciones.js"></script>
   </body>
 </html>
