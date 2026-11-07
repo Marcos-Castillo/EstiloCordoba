@@ -4,7 +4,7 @@ Los 5 diagramas modelan la **transacción principal del sistema: la Atención** 
 
 ## 1. Diagrama de Clases (MODP)
 
-**Herramienta**: StarUML 7 · **Imagen**: [`uml/class-diagram.png`](uml/class-diagram.png) · **Fuente**: [`uml/class-diagram.mmd`](uml/class-diagram.mmd)
+**Herramienta**: Mermaid · **Imagen**: [`uml/class-diagram.png`](uml/class-diagram.png) · **Fuente**: [`uml/class-diagram.mmd`](uml/class-diagram.mmd)
 
 Clases esenciales: `Atencion`, `DetalleAtencion`, `Cliente`, `Barbero`, `Servicio`, `Producto`.
 Clases de soporte: `Turno`, `Usuario`, `Proveedor`, `Compra`, `DetalleCompra`, y las enumeraciones `EstadoAtencion` y `MedioPago`.
@@ -144,7 +144,7 @@ classDiagram
 
 ## 2. Diagrama de Estados — Atención
 
-**Herramienta**: StarUML 7 · **Imagen**: [`uml/state-diagram.png`](uml/state-diagram.png) · **Fuente**: [`uml/state-diagram.mmd`](uml/state-diagram.mmd)
+**Herramienta**: Mermaid · **Imagen**: [`uml/state-diagram.png`](uml/state-diagram.png) · **Fuente**: [`uml/state-diagram.mmd`](uml/state-diagram.mmd)
 
 Ciclo de vida según el enunciado: **Registrada → En proceso → Finalizada → Pendiente de pago → Cobrada**. El cobro se registra desde el estado *Pendiente de pago*, tal como lo exige la aplicación.
 
